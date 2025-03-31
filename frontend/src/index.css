@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+:root {
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+  color-scheme: dark;
+  overflow-x: hidden;
+  background: url() no-repeat center center fixed;
+  background-size: cover;
+}
+
