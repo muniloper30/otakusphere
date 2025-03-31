@@ -1,7 +1,9 @@
 import { useState } from "react";
-
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import logoNav from "../assets/otakulogo1.png"; 
+
+
 
 const NavBar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -20,44 +22,36 @@ const NavBar = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center flex-shrink-0">
               <img
-                
-                alt="Workout Forge Logo"
+                src={logoNav}
+                alt="OtakuSphere Logo"
                 className="h-15 w-15 mr-2"
               />
-              <Link to="/HomePage">
-                <span className="text-3xl cursor-pointer px-2 py-2 tracking-tight font-[Saira] hover:bg-[#E13B3B] transition duration-500">
-                  Workout Forge
+              <Link to="#">
+                <span className="text-3xl cursor-pointer px-2 py-2 tracking-tight font-[Saira] hover:bg-[#F166B4] transition duration-500">
+                  OtakuSphere
                 </span>
               </Link>
             </div>
             <ul className="hidden lg:flex ml-14 space-x-12">
               <li>
                 <Link
-                  to="/HomePage"
-                  className="block px-3 py-2 text-neutral-100 hover:bg-[#E13B3B] transition duration-500 hover:scale-125"
+                  to="#"
+                  className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125"
                 >
-                  Home
+                  Inicio
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/Workouts"
-                  className="block px-3 py-2 text-neutral-100 hover:bg-[#E13B3B] transition duration-500 hover:scale-125"
+                  to="#"
+                  className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125"
                 >
-                  Workouts
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/CsgStudio"
-                  className="block px-3 py-2 text-neutral-100 hover:bg-[#E13B3B] transition duration-500 hover:scale-125"
-                >
-                  Csg
+                  Lista Animes
                 </Link>
               </li>
               <li>
                 <button
-                  className="block px-3 py-2 text-neutral-100 hover:bg-[#E13B3B] transition duration-500 hover:scale-125 cursor-pointer"
+                  className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                 >
                   Perfil
                 </button>
@@ -65,20 +59,20 @@ const NavBar = () => {
             </ul>
             <div className="hidden lg:flex justify-center space-x-12 items-center">
               <Link
-                to="/Login"
+                to="#"
                 className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125"
               >
-                Login
+                Iniciar Sesión
               </Link>
               <Link
-                to="/CreateAccount"
-                className="bg-gradient-to-r from-[#E13B3B] to-[#ca0303] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125"
+                to="#"
+                className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125"
               >
-                Create an account
+                Crear una cuenta
               </Link>
             </div>
             <div
-              className={`lg:hidden cursor-pointer transition-all duration-300 ${isOpen ? "text-red-500 rotate-90" : "text-white"}`}
+              className={`lg:hidden cursor-pointer transition-all duration-300 ${isOpen ? "text-pink-500 rotate-90" : "text-white"}`}
               onClick={toggleNavBar}
             >
               <button className="cursor-pointer">
@@ -91,28 +85,21 @@ const NavBar = () => {
               <ul className="flex flex-col items-center gap-5">
                 <li>
                   <button
-                    className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#E13B3B] transition duration-500 hover:scale-125"
+                    className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                   >
-                    Home
+                    Inicio
                   </button>
                 </li>
                 <li>
                   <button
-                    className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#E13B3B] transition duration-500 hover:scale-125"
+                    className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                   >
-                    Workouts
+                    Lista Animes
                   </button>
                 </li>
                 <li>
                   <button
-                    className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#E13B3B] transition duration-500 hover:scale-125"
-                  >
-                    Csg Studio
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="block px-3 py-2 text-2xl text-neutral-100 hover:bg-[#E13B3B] transition duration-500 hover:scale-125 cursor-pointer"
+                    className="block px-3 py-2 text-2xl text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                   >
                     Perfil
                   </button>
@@ -122,14 +109,14 @@ const NavBar = () => {
               <br />
               <div className="flex flex-col items-center gap-5">
                 <button
-                  className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125 text-2xl"
+                  className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
                 >
-                  Login
+                  Iniciar Sesión
                 </button>
                 <button
-                  className="bg-gradient-to-r from-[#E13B3B] to-[#ca0303] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125 text-2xl"
+                  className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
                 >
-                  Create an account
+                  Crear una cuenta
                 </button>
               </div>
             </div>
