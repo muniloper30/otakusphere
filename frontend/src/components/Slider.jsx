@@ -4,13 +4,13 @@ import "@egjs/react-flicking/dist/flicking.css";
 
 const Slider = () => {
   const images = [
-    { src: "/chainsaw-man.jpg", alt: "Chainsaw Man" },
-    { src: "/daima.jpg", alt: "Daima" },
+    { src: "/kaiju8.jpg", alt: "Chainsaw Man" },
+    { src: "/demon-slayer.jpg", alt: "Daima" },
     { src: "/dandadan.jpg", alt: "Dandadan" },
-    { src: "/demon-slayer.jpg", alt: "Demon Slayer" },
+    { src: "/daima.jpg", alt: "Demon Slayer" },
     { src: "/fireForce.jpg", alt: "Fire Force" },
     { src: "/JUJUTSU-KAISEN.jpg", alt: "Jujutsu Kaisen" },
-    { src: "/kaiju8.jpg", alt: "Kaiju No. 8" },
+    { src: "/chainsaw-man.jpg", alt: "Kaiju No. 8" },
     { src: "/my-hero-academia.jpg", alt: "My Hero Academia" },
     { src: "/one-piece-anime.avif", alt: "One Piece" },
     { src: "/soloLeveling.jpg", alt: "Solo Leveling" },

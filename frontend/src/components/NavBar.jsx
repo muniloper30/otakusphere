@@ -26,7 +26,7 @@ const NavBar = () => {
                 alt="OtakuSphere Logo"
                 className="h-15 w-15 mr-2"
               />
-              <Link to="#">
+              <Link to="/HomePage">
                 <span className="text-3xl cursor-pointer px-2 py-2 tracking-tight font-[Saira] hover:bg-[#F166B4] transition duration-500">
                   OtakuSphere
                 </span>
@@ -35,7 +35,7 @@ const NavBar = () => {
             <ul className="hidden lg:flex ml-14 space-x-12">
               <li>
                 <Link
-                  to="#"
+                  to="/HomePage"
                   className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125"
                 >
                   Inicio

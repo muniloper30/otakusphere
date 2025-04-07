@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import FooterSection from "./components/FooterSection";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 
@@ -26,7 +25,7 @@ function App() {
           <Route path="/HomePage" element={<HomePage />} />
         </Routes>
 
-      
+      <FooterSection />
       </div>
     </Router>
   );
