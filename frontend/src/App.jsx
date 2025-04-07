@@ -5,22 +5,11 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 
 function App() {
-  const [animeList, setAnimeList] = useState([]); // Iniciar el estado animeList como un array vacío
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/anime")
-      .then((response) => {
-        setAnimeList(response.data.data.Page.media);
-      })
-      .catch((error) => {
-        console.error("Error fetching anime data:", error);
-      });
-  }, []); // El segundo argumento vacío significa que el efecto se ejecutará solo una vez al montar el componente
 
   return (
     <Router> {/* Envolver toda la aplicación con Router */}
-      <div>
+      <div className="relative min-h-screen">
         {/* Fondo decorativo */}
         <div className="absolute -z-10 inset-0 h-full w-full bg-black">
           <div className="absolute inset-0 bg-[linear-gradient(#00ffff15_1px,transparent_1px),linear-gradient(90deg,#00ffff15_1px,transparent_1px)] bg-[size:40px_40px]"></div>
