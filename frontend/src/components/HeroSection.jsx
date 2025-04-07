@@ -7,7 +7,7 @@ const HeroSection = () => {
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm/6 text-white ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             Tu espacio Otaku personalizado, tu lista, tus reseñas, tus recomendaciones.{" "}
-            <a href="#featuresSection" className="font-semibold text-[#F166B4]">
+            <a href="#featureSection" className="font-semibold text-[#F166B4]">
               <span aria-hidden="true" className="absolute inset-0" />
               Conoce más <span aria-hidden="true">&rarr;</span>
             </a>
@@ -28,7 +28,7 @@ const HeroSection = () => {
               Explorar lista
             </Link>
             <a
-              href="#featuresSection"
+              href="#featureSection"
               className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125"
             >
               Conoce más <span aria-hidden="true">→</span>
