@@ -43,7 +43,7 @@ const NavBar = () => {
               </li>
               <li>
                 <Link
-                  to="#"
+                  to="/AnilistPage"
                   className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125"
                 >
                   Lista Animes
@@ -84,18 +84,18 @@ const NavBar = () => {
             <div className="fixed top-20 left-0 z-20 bg-neutral-900 w-screen h-[calc(100vh-4rem)] p-6 md:p-12 flex flex-col justify-center items-center lg:hidden transition-all duration-700 ease-in-out">
               <ul className="flex flex-col items-center gap-5">
                 <li>
-                  <button
+                  <Link to="/HomePage"
                     className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                   >
                     Inicio
-                  </button>
+                  </Link>
                 </li>
                 <li>
-                  <button
+                  <Link to="/AnilistPage" 
                     className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
-                  >
+                    >
                     Lista Animes
-                  </button>
+                  </Link>
                 </li>
                 <li>
                   <button

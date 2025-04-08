@@ -26,7 +26,6 @@ const Slider = () => {
         circular={true}
         duration={500} // animación más lenta
         deceleration={0.007} // menor deceleración = más lento
-        cameraPadding={{ left: 60, right: 60 }} // espacio a los lados para mostrar previews
         useMouse={true}
         useTouch={true}
       >
