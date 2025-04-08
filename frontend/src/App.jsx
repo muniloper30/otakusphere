@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FooterSection from "./components/FooterSection";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
+import AnilistPage from "./pages/AnilistPage";
+
 
 function App() {
 
@@ -23,6 +25,7 @@ function App() {
         <Routes>
           <Route index element={<HomePage />} />
           <Route path="/HomePage" element={<HomePage />} />
+          <Route path="/AnilistPage" element={<AnilistPage />} />
         </Routes>
 
       <FooterSection />
