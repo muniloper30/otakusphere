@@ -2,17 +2,26 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoNav from "../assets/otakulogo1.png"; 
-
+import { useNavigate } from "react-router-dom";
 
 
 const NavBar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Alternar el menú hamburguesa
+  // Alternar entre cerrar o abrir el menú hamburguesa
   const toggleNavBar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
     setIsOpen(!isOpen);
+  };
+
+  //Funcion para cerrar menú y navegar a la ruta seleccionada
+  const handleNavClick = (path) => {
+    setMobileDrawerOpen(false);
+    window.scrollTo(0, 0); // Hace scroll hacia arriba
+    setIsOpen(false);
+    navigate(path);
   };
 
   return (
@@ -85,6 +94,7 @@ const NavBar = () => {
               <ul className="flex flex-col items-center gap-5">
                 <li>
                   <Link to="/HomePage"
+                    onClick={handleNavClick}
                     className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                   >
                     Inicio
@@ -92,6 +102,7 @@ const NavBar = () => {
                 </li>
                 <li>
                   <Link to="/AnilistPage" 
+                    onClick={handleNavClick}
                     className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                     >
                     Lista Animes
