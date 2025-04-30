@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "../components/Pagination";
+import AnimeFilters from "../components/AnimeFilters";
+
+
 
 const AnilistPage = () => {
   // Estado para almacenar los animes
@@ -12,6 +15,22 @@ const AnilistPage = () => {
   // Estado para manejar el estado de carga
   const [loading, setLoading] = useState(true);
 
+
+// Estado para manejar los filtros
+const [filters, setFilters] = useState({
+  search: "",
+  genre: "",
+  year: "",
+  status: "",
+});
+
+// Actualiza los filtros desde el componente de filtros
+const handleFilterChange = (e) => {
+  setFilters({ ...filters, [e.target.name]: e.target.value });
+  setPage(1); // Reinicia la paginación
+};
+
+
   // Consulta a GraphQL para obtener los animes con paginación
   // Usamos la librería axios para hacer la consulta a la API de Anilist
   const fetchAnimes = async () => {
@@ -19,27 +38,34 @@ const AnilistPage = () => {
 
     // Definimos la consulta GraphQL
     const query = `
-      query ($page: Int) {
-        Page(page: $page, perPage: 12) {
-          pageInfo {
-            total
-            currentPage
-            lastPage
-          }
-          media(type: ANIME, sort: POPULARITY_DESC) {
-            id
-            title {
-              romaji
-            }
-            coverImage {
-              extraLarge
-            }
-            episodes
-            format
-          }
-        }
+  query ($page: Int, $search: String, $genre: [String], $year: Int, $status: MediaStatus) {
+    Page(page: $page, perPage: 12) {
+      pageInfo {
+        total
+        currentPage
+        lastPage
       }
-    `;
+      media(
+        type: ANIME,
+        sort: POPULARITY_DESC,
+        search: $search,
+        genre_in: $genre,
+        seasonYear: $year,
+        status: $status
+      ) {
+        id
+        title {
+          romaji
+        }
+        coverImage {
+          extraLarge
+        }
+        episodes
+        format
+      }
+    }
+  }
+`;
 
     // Realizamos la petición y si la respuesta es correcta, guardamos los animes en el estado con setAnimes
     // También actualizamos el total de páginas con setTotalPages
@@ -74,7 +100,7 @@ const AnilistPage = () => {
   /// llamando a la función fetchAnimes para obtener los animes
   useEffect(() => {
     fetchAnimes();
-  }, [page]);
+  }, [page, filters]); // Dependencias: page y filters
 
   // Si los datos aún están cargando, mostramos un mensaje de carga
   if (loading) {
@@ -91,7 +117,7 @@ const AnilistPage = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-8 text-center">Animes Populares</h1>
-
+      <AnimeFilters filters={filters} onChange={handleFilterChange} />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {animes.map((anime) => (
           <div

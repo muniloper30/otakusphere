@@ -36,7 +36,7 @@ const NavBar = () => {
                 className="h-15 w-15 mr-2"
               />
               <Link to="/HomePage">
-                <span className="text-3xl cursor-pointer px-2 py-2 tracking-tight font-[Saira] hover:bg-[#F166B4] transition duration-500">
+                <span className="text-3xl cursor-pointer px-2 py-2 tracking-tight font-[Saira] hover:bg-[#F166B4] active:bg-[#1B9CF0] transition duration-500">
                   OtakuSphere
                 </span>
               </Link>
@@ -45,7 +45,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/HomePage"
-                  className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125"
+                  className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] active:bg-[#1B9CF0] transition duration-500 hover:scale-125"
                 >
                   Inicio
                 </Link>
@@ -53,7 +53,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/AnilistPage"
-                  className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125"
+                  className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125 active:bg-[#1B9CF0]"
                 >
                   Lista Animes
                 </Link>
@@ -68,7 +68,7 @@ const NavBar = () => {
             </ul>
             <div className="hidden lg:flex justify-center space-x-12 items-center">
               <Link
-                to="#"
+                to="/Login"
                 className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125"
               >
                 Iniciar Sesión

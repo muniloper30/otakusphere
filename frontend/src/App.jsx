@@ -3,7 +3,8 @@ import FooterSection from "./components/FooterSection";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import AnilistPage from "./pages/AnilistPage";
-
+import Login from "./pages/Login";
+import { LogIn } from "lucide-react";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/HomePage" element={<HomePage />} />
           <Route path="/AnilistPage" element={<AnilistPage />} />
+          <Route path="/Login" element={<Login/>} />
         </Routes>
 
       <FooterSection />
