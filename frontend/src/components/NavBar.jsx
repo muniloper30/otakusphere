@@ -33,7 +33,7 @@ const NavBar = () => {
               <img
                 src={logoNav}
                 alt="OtakuSphere Logo"
-                className="h-15 w-15 mr-2"
+                className="h-15 w-15 mr-2 animate-rotational-wave"
               />
               <Link to="/HomePage">
                 <span className="text-3xl cursor-pointer px-2 py-2 tracking-tight font-[Saira] hover:bg-[#F166B4] active:bg-[#1B9CF0] transition duration-500">
@@ -119,11 +119,13 @@ const NavBar = () => {
               <br />
               <br />
               <div className="flex flex-col items-center gap-5">
-                <button
+                <Link
+                  to="/Login"
+                  onClick={handleNavClick}
                   className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
                 >
                   Iniciar Sesión
-                </button>
+                </Link>
                 <button
                   className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
                 >

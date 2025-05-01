@@ -1,32 +1,42 @@
-
-
 const Login = () => {
     return (
-        <div className="flex h-screen">
-            {/* Formulario de login a la izquierda */}
-            <div className="flex flex-col justify-center items-center w-1/2 bg-gray-400 p-10">
-                <h1 className="text-4xl font-bold mb-6">Login</h1>
-                <form className="bg-white p-10 rounded shadow-md w-80">
+        <div className="relative h-screen w-full md:flex">
+            {/* Imagen de fondo para móvil */}
+            <div className="absolute md:relative w-full h-full md:w-1/2 md:h-full z-0 overflow-hidden">
+                <img
+                    src="loginImg.jpg"
+                    alt="Img Login"
+                    className="object-cover md:objet w-full h-full md:animate-pulse"
+                />
+            </div>
+
+            {/* Formulario de login */}
+            <div className="relative flex gap-3.5 flex-col justify-center items-center w-full md:w-1/2 bg-blend-difference md:bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] p-10 bg-opacity-80 md:bg-opacity-100">
+            <h1 className="text-2xl bg-gray-700 text-center font-bold mb-6 py-2 px-3 border rounded-md animate-impulse-rotation-left">Tu universo otaku te espera. Inicia sesión</h1>
+                <h1 className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] text-2xl font-bold mb-6 py-2 px-3 border rounded-md animate-impulse-rotation-left">
+                    Login
+                </h1>
+                <form className="bg-gray-100 p-6 rounded shadow-md w-75 max-w-md animate-impulse-rotation-left">
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                        <label className="block text-gray-800 text-sm font-bold mb-2" htmlFor="username">
                             Username
                         </label>
                         <input
                             type="text"
                             id="username"
                             placeholder="Enter your username"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
                     <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                        <label className="block text-gray-800 text-sm font-bold mb-2" htmlFor="password">
                             Password
                         </label>
                         <input
                             type="password"
                             id="password"
                             placeholder="Enter your password"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
                     <button
@@ -36,15 +46,6 @@ const Login = () => {
                         Login
                     </button>
                 </form>
-            </div>
-
-            {/* Imagen a la derecha */}
-            <div className="w-1/2 h-full">
-                <img
-                    src="loginImg.jpg" // Cambia esta ruta por la de tu imagen
-                    alt="Img Login"
-                    className="object-cover w-full h-full"
-                />
             </div>
         </div>
     );

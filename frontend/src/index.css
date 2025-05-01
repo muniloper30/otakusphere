@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "@midudev/tailwind-animations";
+
+
 
 :root {
   scroll-behavior: smooth;

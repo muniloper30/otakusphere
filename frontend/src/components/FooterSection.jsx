@@ -9,7 +9,7 @@ const FooterSection = () => {
     return (
       <footer className='text-center '>
       <div className="max-w-screen-xl mx-auto p-4 md:py-8 ">
-          <div className="md:flex md:flex-row md:items-center md:justify-between justify-center items-center flex flex-col pt-35">
+          <div className="md:flex md:flex-row md:items-center md:justify-between justify-center items-center flex flex-col ">
               <Link to="/HomePage" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse ">
                   <img src= {LogoOtaku1}  className="pt h-15 w-15 md:h-15 md:w-15 hidden md:block" alt="OtakuSphere Logo" />
                   <p className="self-center text-2xl font-semibold text-[#F166B4] space-nowrap  font-[Saira]">Otaku<span className="text-[#1B9CF0]">Sphere</span> </p>
