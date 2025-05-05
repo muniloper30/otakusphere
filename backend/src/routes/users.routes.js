@@ -1,6 +1,6 @@
 import express from 'express';
 import { getUsuarios, getUsuarioById, createUsuario, updateUser, deleteUser, loginUsuario } from '../controllers/users.controller.js';
-
+//Variable para la conexión a la base de datos
 const router = express.Router();
 
 // Rutas para la gestión de usuarios

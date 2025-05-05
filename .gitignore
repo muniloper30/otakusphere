@@ -24,5 +24,9 @@ dist-ssr
 *.sw?
 
 
+# Ignorar .env del backend
+/backend/.env
 
-.env
+# Node modules de frontend y backend
+/backend/node_modules
+/frontend/node_modules
