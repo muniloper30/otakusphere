@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import AnilistPage from "./pages/AnilistPage";
 import Login from "./pages/Login";
-import { LogIn } from "lucide-react";
+import Register from "./pages/Register";
 
 function App() {
 
@@ -28,6 +28,7 @@ function App() {
           <Route path="/HomePage" element={<HomePage />} />
           <Route path="/AnilistPage" element={<AnilistPage />} />
           <Route path="/Login" element={<Login/>} />
+          <Route path="/Register" element={<Register/>} />
         </Routes>
 
       <FooterSection />

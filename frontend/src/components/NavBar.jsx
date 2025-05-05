@@ -74,7 +74,7 @@ const NavBar = () => {
                 Iniciar Sesión
               </Link>
               <Link
-                to="#"
+                to="/Register"
                 className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125"
               >
                 Crear una cuenta
@@ -126,11 +126,13 @@ const NavBar = () => {
                 >
                   Iniciar Sesión
                 </Link>
-                <button
+                <Link
+                  to="/Register"
+                  onClick={handleNavClick}
                   className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
                 >
                   Crear una cuenta
-                </button>
+                </Link>
               </div>
             </div>
           )}
