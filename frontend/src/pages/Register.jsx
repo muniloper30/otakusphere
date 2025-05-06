@@ -1,28 +1,54 @@
-import { Link } from "react-router-dom";    
+import { Link } from "react-router-dom";
 import Modal from "../components/Modal";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmEmail, setConfirmEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const location = useLocation();
-const [showModal, setShowModal] = useState(false);
+    if (email !== confirmEmail) {
+      alert("Los correos no coinciden");
+      return;
+    }
 
-useEffect(() => {
-  // Verifica si la ubicación tiene el estado "showModal" y actualiza el estado del modal
-  if (location.state && location.state.showModal) {
-    setShowModal(true);
-  }
+    if (password !== confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
 
-}, [location]);
+    try {
+      await axios.post("http://localhost:8080/usuarios", {
+        nombre,
+        email,
+        password,
+      });
 
+      alert("Cuenta creada correctamente. Inicia sesión.");
+      navigate("/perfil"); // Redirige a la página de perfil después de crear la cuenta
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+      alert("Ocurrió un error al crear la cuenta.");
+    }
+  };
 
-
-
-
+  useEffect(() => {
+    // Verifica si la ubicación tiene el estado "showModal" y actualiza el estado del modal
+    if (location.state && location.state.showModal) {
+      setShowModal(true);
+    }
+  }, [location]);
 
   return (
     <div className="relative h-screen w-full md:flex">
@@ -42,7 +68,10 @@ useEffect(() => {
         <h1 className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] text-2xl font-bold mb-6 py-2 px-3 border rounded-md animate-impulse-rotation-left">
           Crear cuenta
         </h1>
-        <form className="bg-gray-100 p-6 rounded shadow-md w-75 max-w-md animate-impulse-rotation-left">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-gray-100 p-6 rounded shadow-md w-75 max-w-md animate-impulse-rotation-left"
+        >
           <div className="mb-4">
             <label
               className="block text-gray-800 text-sm font-bold mb-2"
@@ -53,6 +82,8 @@ useEffect(() => {
             <input
               type="text"
               id="username"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
               placeholder="Escribe tu nombre de usuario"
               className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -60,13 +91,15 @@ useEffect(() => {
           <div className="mb-6">
             <label
               className="block text-gray-800 text-sm font-bold mb-2"
-              htmlFor="password"
+              htmlFor="email"
             >
               Correo electrónico
             </label>
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Escribe tu correo electrónico"
               className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -74,13 +107,15 @@ useEffect(() => {
           <div className="mb-6">
             <label
               className="block text-gray-800 text-sm font-bold mb-2"
-              htmlFor="password"
+              htmlFor="confirmEmail"
             >
               Confirma tu correo
             </label>
             <input
-              type="text"
-              id="emailText"
+              type="email"
+              id="confirmEmail"
+              value={confirmEmail}
+              onChange={(e) => setConfirmEmail(e.target.value)}
               placeholder="Confirma tu correo"
               className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -95,6 +130,8 @@ useEffect(() => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Escribe tu contraseña"
               className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -102,13 +139,15 @@ useEffect(() => {
           <div className="mb-6">
             <label
               className="block text-gray-800 text-sm font-bold mb-2"
-              htmlFor="password"
+              htmlFor="confirmPassword"
             >
               Confirma tu Contraseña
             </label>
             <input
               type="password"
-              id="password"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirma tu contraseña"
               className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -129,13 +168,12 @@ useEffect(() => {
       </div>
 
       {showModal && (
-  <Modal
-    title="Acceso restringido"
-    message="Debes iniciar sesión o registrarte para acceder al perfil."
-    onClose={() => setShowModal(false)}
-  />
-)}
-
+        <Modal
+          title="Acceso restringido"
+          message="Debes iniciar sesión o registrarte para acceder al perfil."
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };
