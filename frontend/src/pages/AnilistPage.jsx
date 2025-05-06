@@ -1,81 +1,79 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Pagination from "../components/Pagination";
 import AnimeFilters from "../components/AnimeFilters";
+import debounce from "lodash/debounce";
 
 
 
+//Constantes para los filtros
 const AnilistPage = () => {
-  // Estado para almacenar los animes
   const [animes, setAnimes] = useState([]);
-  // Estado para manejar la página actual
   const [page, setPage] = useState(1);
-  // Estado para manejar el total de páginas
   const [totalPages, setTotalPages] = useState(0);
-  // Estado para manejar el estado de carga
   const [loading, setLoading] = useState(true);
+// Estado para los filtros
+  const [filters, setFilters] = useState({
+    search: "",
+    genre: "",
+    year: "",
+    status: "",
+  });
+
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+    setPage(1);
+  };
 
 
-// Estado para manejar los filtros
-const [filters, setFilters] = useState({
-  search: "",
-  genre: "",
-  year: "",
-  status: "",
-});
-
-// Actualiza los filtros desde el componente de filtros
-const handleFilterChange = (e) => {
-  setFilters({ ...filters, [e.target.name]: e.target.value });
-  setPage(1); // Reinicia la paginación
-};
-
-
-  // Consulta a GraphQL para obtener los animes con paginación
-  // Usamos la librería axios para hacer la consulta a la API de Anilist
-  const fetchAnimes = async () => {
-    setLoading(true); // Activamos el estado de carga al iniciar la petición
-
-    // Definimos la consulta GraphQL
+  // Función para obtener los animes de la API de Anilist
+  // Se utiliza useCallback para evitar que la función se vuelva a crear en cada renderizado
+  const fetchAnimes = useCallback(async () => {
+    setLoading(true);
     const query = `
-  query ($page: Int, $search: String, $genre: [String], $year: Int, $status: MediaStatus) {
-    Page(page: $page, perPage: 12) {
-      pageInfo {
-        total
-        currentPage
-        lastPage
-      }
-      media(
-        type: ANIME,
-        sort: POPULARITY_DESC,
-        search: $search,
-        genre_in: $genre,
-        seasonYear: $year,
-        status: $status
-      ) {
-        id
-        title {
-          romaji
+      query ($page: Int, $search: String, $genre: [String], $year: Int, $status: MediaStatus) {
+        Page(page: $page, perPage: 12) {
+          pageInfo {
+            total
+            currentPage
+            lastPage
+          }
+          media(
+            type: ANIME,
+            sort: POPULARITY_DESC,
+            search: $search,
+            genre_in: $genre,
+            seasonYear: $year,
+            status: $status
+          ) {
+            id
+            title {
+              romaji
+            }
+            coverImage {
+              extraLarge
+            }
+            episodes
+            format
+          }
         }
-        coverImage {
-          extraLarge
-        }
-        episodes
-        format
       }
-    }
-  }
-`;
+    `;
 
-    // Realizamos la petición y si la respuesta es correcta, guardamos los animes en el estado con setAnimes
-    // También actualizamos el total de páginas con setTotalPages
-    // Si hay un error, lo mostramos en la consola
+    // Realiza la solicitud a la API de Anilist
+    // Se utiliza axios para hacer la solicitud POST a la API de Anilist
     try {
       const response = await axios.post(
         "https://graphql.anilist.co",
         {
           query,
-          variables: { page }, // ← Pasamos la variable page a la consulta
+          variables: {
+            page,
+            search: filters.search || undefined,
+            genre: filters.genre ? [filters.genre] : undefined,
+            year: filters.year ? parseInt(filters.year) : undefined,
+            status: filters.status || undefined,
+          },
         },
         {
           headers: {
@@ -86,23 +84,27 @@ const handleFilterChange = (e) => {
       );
 
       const data = response.data.data.Page;
-      setAnimes(data.media); // Guardamos los animes obtenidos
-      setTotalPages(data.pageInfo.lastPage); // Obtenemos el total de páginas reales
+      setAnimes(data.media);
+      setTotalPages(data.pageInfo.lastPage);
     } catch (error) {
-      // Si hay un error, lo mostramos en la consola
       console.error("Error al obtener los animes:", error);
     } finally {
-      setLoading(false); // Cambiamos el estado de carga a false
+      setLoading(false);
     }
-  };
+  }, [page, filters]);
 
-  /// useEffect se ejecuta una vez al cargar el componente o cuando cambia la página,
-  /// llamando a la función fetchAnimes para obtener los animes
+  // useEffect para cargar los animes al montar el componente y al cambiar de página o filtros
+  // Se utiliza debounce para evitar que la función se ejecute demasiadas veces al cambiar los filtros
   useEffect(() => {
-    fetchAnimes();
-  }, [page, filters]); // Dependencias: page y filters
+  const debouncedFetch = debounce(fetchAnimes, 500); // espera 500 ms
+  debouncedFetch();
 
-  // Si los datos aún están cargando, mostramos un mensaje de carga
+  return () => {
+    debouncedFetch.cancel(); // limpia el debounce si el componente se desmonta o cambia antes de tiempo
+  };
+}, [fetchAnimes]);
+
+  
   if (loading) {
     return (
       <div className="text-3xl flex items-center justify-center h-screen">
@@ -138,12 +140,10 @@ const handleFilterChange = (e) => {
           </div>
         ))}
       </div>
-
-      {/* Componente de paginación */}
       <Pagination
-        currentPage={page} // Página actual manejada por el estado
-        totalPages={totalPages} // Total de páginas reales desde la API
-        onPageChange={(newPage) => setPage(newPage)} // Cambio de página desde el paginador
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={(newPage) => setPage(newPage)}
       />
     </div>
   );
