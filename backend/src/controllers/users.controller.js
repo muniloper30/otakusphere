@@ -1,5 +1,7 @@
 import { pool } from '../db/db.js';
 import bcrypt  from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
 
 // Obtener todos los usuarios
 export const getUsuarios = async (req, res) => {
@@ -111,8 +113,27 @@ export const loginUsuario = async (req, res) => {
       return res.status(401).json({ error: "Credenciales inválidas" });
     }
 
-    // Si todo va bien
-    res.json({ mensaje: "Login exitoso", usuario: { id: usuario.id_usuario, nombre: usuario.nombre, email: usuario.email } });
+    //Generamos un token para el usuario
+    const token = jwt.sign(
+      {
+        id: usuario.id_usuario,
+        nombre: usuario.nombre,
+        email: usuario.email,  
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" } // El token expira en 1 hora
+    );
+
+    res.json({
+      mensaje: "Login exitoso",
+      token,
+      usuario: {
+        id: usuario.id_usuario,
+        nombre: usuario.nombre,
+        email: usuario.email
+      }
+    });
+    
 
   } catch (error) {
     console.error("Error en login:", error);
