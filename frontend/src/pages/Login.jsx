@@ -33,7 +33,21 @@ const Login = () => {
             <input
               type="text"
               id="username"
-              placeholder="Enter your username"
+              placeholder="Escribe tu nombre otaku"
+              className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-800 text-sm font-bold mb-2"
+              htmlFor="username"
+            >
+              Correo electrónico
+            </label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Introduce el correo de tu cuenta"
               className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
@@ -47,7 +61,7 @@ const Login = () => {
             <input
               type="password"
               id="password"
-              placeholder="Enter your password"
+              placeholder="Escribe tu contraseña"
               className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>

@@ -5,12 +5,16 @@ import HomePage from "./pages/HomePage";
 import AnilistPage from "./pages/AnilistPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PerfilPage from "./pages/PerfilPage";
+import ProtectedRoute from "./utils/ProtectedRoute";
+
+
 
 function App() {
-
-
   return (
-    <Router> {/* Envolver toda la aplicación con Router */}
+    <Router>
+      {" "}
+      {/* Envolver toda la aplicación con Router */}
       <div className="relative min-h-screen">
         {/* Fondo decorativo */}
         <div className="absolute -z-10 inset-0 h-full w-full bg-black">
@@ -27,11 +31,19 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/HomePage" element={<HomePage />} />
           <Route path="/AnilistPage" element={<AnilistPage />} />
-          <Route path="/Login" element={<Login/>} />
-          <Route path="/Register" element={<Register/>} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+          <Route
+            path="/Perfil"
+            element={
+              <ProtectedRoute>
+                <PerfilPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
 
-      <FooterSection />
+        <FooterSection />
       </div>
     </Router>
   );
@@ -39,10 +51,9 @@ function App() {
 
 export default App;
 
-
-
-
-  {/* Contenido principal */}
+{
+  /* Contenido principal */
+}
 //   <div className=" flex items-center justify-center flex-col gap-10">
 //   <h1 className="text-5xl font-bold text-gray-800">Welcome to the App</h1>
 //   <ul className="rounded-2xl shadow-lg p-5 bg-white space-y-3">

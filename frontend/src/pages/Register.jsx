@@ -1,6 +1,29 @@
 import { Link } from "react-router-dom";    
+import Modal from "../components/Modal";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+
 
 const Register = () => {
+
+
+const location = useLocation();
+const [showModal, setShowModal] = useState(false);
+
+useEffect(() => {
+  // Verifica si la ubicación tiene el estado "showModal" y actualiza el estado del modal
+  if (location.state && location.state.showModal) {
+    setShowModal(true);
+  }
+
+}, [location]);
+
+
+
+
+
+
   return (
     <div className="relative h-screen w-full md:flex">
       {/* Imagen de fondo para móvil */}
@@ -104,6 +127,15 @@ const Register = () => {
           </h3>
         </form>
       </div>
+
+      {showModal && (
+  <Modal
+    title="Acceso restringido"
+    message="Debes iniciar sesión o registrarte para acceder al perfil."
+    onClose={() => setShowModal(false)}
+  />
+)}
+
     </div>
   );
 };

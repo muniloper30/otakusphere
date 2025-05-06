@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoNav from "../assets/otakulogo1.png"; 
+import logoNav from "../assets/otakulogo1.png";
 import { useNavigate } from "react-router-dom";
-
 
 const NavBar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -59,11 +58,13 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
-                <button
+                <Link
+                  to="/Perfil"
+                  onClick={handleNavClick}
                   className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                 >
                   Perfil
-                </button>
+                </Link>
               </li>
             </ul>
             <div className="hidden lg:flex justify-center space-x-12 items-center">
@@ -81,7 +82,9 @@ const NavBar = () => {
               </Link>
             </div>
             <div
-              className={`lg:hidden cursor-pointer transition-all duration-300 ${isOpen ? "text-pink-500 rotate-90" : "text-white"}`}
+              className={`lg:hidden cursor-pointer transition-all duration-300 ${
+                isOpen ? "text-pink-500 rotate-90" : "text-white"
+              }`}
               onClick={toggleNavBar}
             >
               <button className="cursor-pointer">
@@ -93,7 +96,8 @@ const NavBar = () => {
             <div className="fixed top-20 left-0 z-20 bg-neutral-900 w-screen h-[calc(100vh-4rem)] p-6 md:p-12 flex flex-col justify-center items-center lg:hidden transition-all duration-700 ease-in-out">
               <ul className="flex flex-col items-center gap-5">
                 <li>
-                  <Link to="/HomePage"
+                  <Link
+                    to="/HomePage"
                     onClick={handleNavClick}
                     className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                   >
@@ -101,19 +105,22 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/AnilistPage" 
+                  <Link
+                    to="/AnilistPage"
                     onClick={handleNavClick}
                     className="block px-3 py-2 text-neutral-100 text-2xl hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
-                    >
+                  >
                     Lista Animes
                   </Link>
                 </li>
                 <li>
-                  <button
+                  <Link
+                    to="/Perfil"
+                    onClick={handleNavClick}
                     className="block px-3 py-2 text-2xl text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                   >
                     Perfil
-                  </button>
+                  </Link>
                 </li>
               </ul>
               <br />
