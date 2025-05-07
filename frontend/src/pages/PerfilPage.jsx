@@ -1,10 +1,15 @@
+import { Outlet } from "react-router-dom";
+import SidebarPerfil from "../components/perfil/SidebarPerfil";
+
 const PerfilPage = () => {
-    return (
-        <div>
-        <h1 className="text-3xl text-center pt-3.5">Perfil</h1>
-        <p className="text-xl text-center">Bienvenido a tu perfil de Otaku-Chan</p>
-        </div>
-    );
-    }
+  return (
+    <div className="min-h-screen flex bg-gradient-to-r from-[#F166B4] to-[#1B9CF0]">
+      <SidebarPerfil />
+      <main className="flex-1 p-6">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
 export default PerfilPage;

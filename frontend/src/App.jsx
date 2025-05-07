@@ -7,7 +7,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PerfilPage from "./pages/PerfilPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
-
+import DatosUser from "./components/perfil/DatosUser";
+import ListsUser from "./components/perfil/ListsUser";
 
 
 function App() {
@@ -33,14 +34,15 @@ function App() {
           <Route path="/AnilistPage" element={<AnilistPage />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
-          <Route
-            path="/Perfil"
-            element={
-              <ProtectedRoute>
-                <PerfilPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/perfil" element={<ProtectedRoute><PerfilPage /></ProtectedRoute>}>
+            <Route path="datos" element={<DatosUser/>}/>
+            <Route path="listas" element={<ListsUser/>}/>
+          </Route>
+
+       
+
+
+
         </Routes>
 
         <FooterSection />
