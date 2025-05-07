@@ -121,7 +121,7 @@ export const loginUsuario = async (req, res) => {
         email: usuario.email,  
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" } // El token expira en 1 hora
+      { expiresIn: "24h" } // El token expira en 24 hora
     );
 
     res.json({
