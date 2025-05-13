@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import usersRoutes from './routes/users.routes.js';
+import listsRoutes from "./routes/lists.routes.js";
 
 const app = express();
 
@@ -48,5 +49,8 @@ app.get('/anime', async (req, res) => {
 //Aquí se montan las rutas de usuarios
 app.use('/usuarios', usersRoutes);
 // Aquí se pueden agregar más rutas según sea necesario
+app.use("/listas", listsRoutes);
+
+
 
 export default app;
