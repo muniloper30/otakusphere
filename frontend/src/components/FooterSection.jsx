@@ -31,7 +31,7 @@ const FooterSection = () => {
               </ul>
           </div>
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-white lg:my-8" />
-          <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="#" class="hover:underline">Otakusphere™</a>. All Rights Reserved.</span>
+          <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="#" className="hover:underline">Otakusphere™</a>. All Rights Reserved.</span>
       </div>
   </footer>
     );
