@@ -9,21 +9,57 @@ const SidebarPerfil = () => {
     <aside className="w-64  shadow-md p-4">
       <h2 className="text-xl font-bold mb-4">Mi perfil</h2>
       <nav className="space-y-5">
-        <NavLink to="datos" className={({ isActive }) => `${baseClass} ${isActive ? activeClass : ""}`}>
+        <NavLink
+          to="datos"
+          className={({ isActive }) =>
+            `${baseClass} ${isActive ? activeClass : ""}`
+          }
+        >
           👤 Mis datos
         </NavLink>
-        <NavLink to="listas" className={({ isActive }) => `${baseClass} ${isActive ? activeClass : ""}`}>
+        <NavLink
+          to="listas"
+          className={({ isActive }) =>
+            `${baseClass} ${isActive ? activeClass : ""}`
+          }
+        >
           📺 Mis listas
         </NavLink>
-        <NavLink to="favoritos" className={({ isActive }) => `${baseClass} ${isActive ? activeClass : ""}`}>
+        <NavLink
+          to="favoritos"
+          className={({ isActive }) =>
+            `${baseClass} ${isActive ? activeClass : ""}`
+          }
+        >
           ⭐ Favoritos
         </NavLink>
-        <NavLink to="reseñas" className={({ isActive }) => `${baseClass} ${isActive ? activeClass : ""}`}>
+        <NavLink
+          to="reseñas"
+          className={({ isActive }) =>
+            `${baseClass} ${isActive ? activeClass : ""}`
+          }
+        >
           ✍️ Reseñas
         </NavLink>
-        <NavLink to="configuracion" className={({ isActive }) => `${baseClass} ${isActive ? activeClass : ""}`}>
+        <NavLink
+          to="configuracion"
+          className={({ isActive }) =>
+            `${baseClass} ${isActive ? activeClass : ""}`
+          }
+        >
           ⚙️ Configuración
         </NavLink>
+
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("usuario"); // si guardas info del usuario también
+            window.location.href = "/"; // redirige al inicio
+          }}
+          className="mt-6 block w-full text-left px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 transition-colors"
+        >
+          🔒 Cerrar sesión
+        </button>
       </nav>
     </aside>
   );
