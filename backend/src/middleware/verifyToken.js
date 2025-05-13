@@ -17,7 +17,7 @@ export const verifyToken = (req, res, next) => {
       if (err.name === 'TokenExpiredError') { // Si el token ha expirado, se avisa al usuario de sesion expirada
         return res.status(401).json({ error: 'Sesión expirada. Por favor, inicie sesión nuevamente.' });
       }
-      return res.status(403).json({ error: 'Token inválido.' });
+      return res.status(403).json({ error: 'Token inválido. Usuario no registrado' });
     }
 
     req.usuario = decoded;
