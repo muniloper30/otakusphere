@@ -66,7 +66,8 @@ export const agregarAnimeALista = async (req, res) => {
   }
 };
 
-
+// Obtener animes de una lista específica
+// Esta función obtiene todos los animes de una lista específica del usuario
 export const obtenerAnimesDeLista = async (req, res) => {
     const { nombre_lista } = req.params;
     const id_usuario = req.usuario.id;
@@ -88,7 +89,8 @@ export const obtenerAnimesDeLista = async (req, res) => {
     }
   };
   
-
+// Eliminar un anime de una lista específica
+// Esta función elimina un anime de una lista específica del usuario
 export const eliminarAnimeDeLista = async (req, res) => {
     const { nombre_lista, id_api } = req.params;
     const id_usuario = req.usuario.id;
