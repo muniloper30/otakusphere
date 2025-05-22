@@ -3,6 +3,7 @@ import axios from "axios";
 import Pagination from "../components/Pagination";
 import AnimeFilters from "../components/AnimeFilters";
 import debounce from "lodash/debounce";
+import { notifySuccess, notifyError } from "../utils/ToastUtils"; 
 
 
 
@@ -118,38 +119,37 @@ const AnilistPage = () => {
 
   // Función para guardar el anime en la lista del usuario
   // Se utiliza la API de la aplicación para guardar el anime en la lista del usuario
-  const guardarEnLista = async (anime, estado) => {
-    const token = localStorage.getItem("token");
-  
-    try {
-      const res = await fetch("http://localhost:8080/listas", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          id_api: anime.id,
-          titulo: anime.title.romaji,
-          url_imagen: anime.coverImage.extraLarge,
-          nombre_lista: estado
-        })
-      });
-  
-      if (res.ok) {
-        alert(`✅ Añadido a la lista: ${estado}`);
-      } else {
-        const err = await res.json();
-        alert(`❌ Error: ${err.error}`);
-      }
-    } catch (err) {
-      console.error("Error al guardar en lista:", err);
+ const guardarEnLista = async (anime, estado) => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const res = await fetch("http://localhost:8080/listas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        id_api: anime.id,
+        titulo: anime.title.romaji,
+        url_imagen: anime.coverImage.extraLarge,
+        nombre_lista: estado
+      })
+    });
+
+    if (res.ok) {
+      notifySuccess(`Añadido a la lista: ${estado}`);
+    } else {
+      const err = await res.json();
+      notifyError(`Error: ${err.error}`);
     }
-  };
+  } catch (err) {
+    console.error("Error al guardar en lista:", err);
+    notifyError("Error al conectar con el servidor");
+  }
+};
   
   
-
-
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-8 text-center">Animes Populares</h1>

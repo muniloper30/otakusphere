@@ -9,13 +9,16 @@ import PerfilPage from "./pages/PerfilPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import DatosUser from "./components/perfil/DatosUser";
 import ListsUser from "./components/perfil/ListsUser";
+import ToastProvider from "./providers/ToastProvider";
 
 
 function App() {
   return (
     <Router>
+      <ToastProvider />
       {" "}
       {/* Envolver toda la aplicación con Router */}
+      
       <div className="relative min-h-screen">
         {/* Fondo decorativo */}
         <div className="absolute -z-10 inset-0 h-full w-full bg-black">

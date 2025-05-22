@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { notifySuccess, notifyError, notifyInfo } from "../utils/ToastUtils";
 
 const Login = () => {
 
@@ -27,11 +27,12 @@ const handleSubmit = async (e) => {
     localStorage.setItem("usuario", JSON.stringify(usuario));
 
     // Redirigir
+    notifyInfo("Bienvenido de nuevo, " + usuario.nombre);
     navigate("/perfil");
 
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
-    alert("Credenciales incorrectas o usuario no registrado.");
+    notifyError("Credenciales incorrectas o usuario no encontrado");
   }
 };
 
