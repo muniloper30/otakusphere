@@ -22,7 +22,7 @@ const HeroSection = () => {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-10">
             <Link
-              to="/Workouts"
+              to="/AnilistPage"
               className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125"
             >
               Explorar lista

@@ -36,7 +36,7 @@ const Register = () => {
       });
 
       alert("Cuenta creada correctamente. Inicia sesión.");
-      navigate("/perfil"); // Redirige a la página de perfil después de crear la cuenta
+      navigate("/login"); // Redirige a la página de login después de crear la cuenta
     } catch (error) {
       console.error("Error al registrar usuario:", error);
       alert("Ocurrió un error al crear la cuenta.");
