@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { notifyError, notifySuccess } from "../utils/ToastUtils";
+
 
 const Register = () => {
   const location = useLocation();
@@ -19,12 +21,12 @@ const Register = () => {
     e.preventDefault();
 
     if (email !== confirmEmail) {
-      alert("Los correos no coinciden");
+      notifyError("Los correos no coinciden");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
+      notifyError("Las contraseñas no coinciden");
       return;
     }
 
@@ -35,11 +37,13 @@ const Register = () => {
         password,
       });
 
-      alert("Cuenta creada correctamente. Inicia sesión.");
+      notifySuccess(`Cuenta creada correctamente.
+                     Inicia sesión.`);
       navigate("/login"); // Redirige a la página de login después de crear la cuenta
     } catch (error) {
       console.error("Error al registrar usuario:", error);
-      alert("Ocurrió un error al crear la cuenta.");
+      notifyError(`Error al crear la cuenta. 
+                   Intentalo de nuevo.`);
     }
   };
 

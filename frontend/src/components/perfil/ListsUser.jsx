@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import ModalConfirmacion from "./ModalConfirm";
+import { notifyError, notifyInfo, notifySuccess } from "../../utils/ToastUtils";
 
 const ListsUser = () => {
   const [categoriaActiva, setCategoriaActiva] = useState("viendo");
   const [animes, setAnimes] = useState([]);
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [animeAEliminar, setAnimeAEliminar] = useState(null);
 
   const categorias = {
     viendo: "🟠 Viendo",
@@ -10,6 +14,7 @@ const ListsUser = () => {
     completado: "✅ Completados",
   };
 
+  // Obtener animes según categoría activa
   const fetchAnimes = async (categoria) => {
     const token = localStorage.getItem("token");
 
@@ -31,6 +36,27 @@ const ListsUser = () => {
     }
   };
 
+  // Abrir modal de confirmación
+  const abrirModalConfirmacion = (anime) => {
+    setAnimeAEliminar(anime);
+    setMostrarModal(true);
+  };
+
+  // Confirmar eliminación
+  const confirmarEliminacion = async () => {
+    if (!animeAEliminar) return;
+    await eliminarAnimeDeLista(animeAEliminar.id_api);
+    setAnimeAEliminar(null);
+    setMostrarModal(false);
+  };
+
+  // Cancelar eliminación
+  const cancelarEliminacion = () => {
+    setAnimeAEliminar(null);
+    setMostrarModal(false);
+  };
+
+  // Eliminar anime del backend
   const eliminarAnimeDeLista = async (id_api) => {
     const token = localStorage.getItem("token");
 
@@ -47,9 +73,12 @@ const ListsUser = () => {
 
       if (res.ok) {
         setAnimes(animes.filter((anime) => anime.id_api !== id_api));
+        notifyInfo(
+          `"${animeAEliminar.titulo}" ha sido eliminado de tu lista.`
+        );
       } else {
         const data = await res.json();
-        alert(`❌ Error: ${data.error}`);
+        notifyError(`Error: ${data.error}`);
       }
     } catch (error) {
       console.error("Error al eliminar el anime:", error);
@@ -81,28 +110,28 @@ const ListsUser = () => {
         ))}
       </div>
 
-      {/* Contenido de la lista activa */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+      {/* Lista de animes */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {animes.length === 0 ? (
           <p>No hay animes en esta lista.</p>
         ) : (
           animes.map((anime) => (
             <div
               key={anime.id_api}
-              className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg"
+              className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:scale-105 transition duration-500"
             >
               <img
                 src={anime.url_imagen}
                 alt={anime.titulo}
                 className="w-full h-64 object-cover"
               />
-              <h2 className="mt-2 text-lg font-semibold text-center">
+              <h2 className="mt-2 text-lg font-semibold text-center text-white">
                 {anime.titulo}
               </h2>
 
-              {/* Botón para eliminar */}
+              {/* Botón eliminar */}
               <button
-                onClick={() => eliminarAnimeDeLista(anime.id_api)}
+                onClick={() => abrirModalConfirmacion(anime)}
                 className="mt-3 mb-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm block mx-auto"
               >
                 Eliminar
@@ -111,6 +140,18 @@ const ListsUser = () => {
           ))
         )}
       </div>
+
+      {/* Modal de confirmación */}
+      {mostrarModal && (
+        <ModalConfirmacion
+          title="¿Estás seguro?"
+          message={`¿Quieres eliminar "${animeAEliminar?.titulo}" de tu lista?`}
+          onCancel={cancelarEliminacion}
+          onConfirm={confirmarEliminacion}
+          confirmText="Sí, eliminar"
+          cancelText="Cancelar"
+        />
+      )}
     </div>
   );
 };

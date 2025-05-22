@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { notifySuccess, notifyError, notifyInfo } from "../utils/ToastUtils";
+import { notifyError, notifyInfo } from "../utils/ToastUtils";
 
 const Login = () => {
 
