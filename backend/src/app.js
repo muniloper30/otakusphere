@@ -2,11 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import usersRoutes from './routes/users.routes.js';
 import listsRoutes from "./routes/lists.routes.js";
+import favoritesRoutes from "./routes/favorites.routes.js";
 
 const app = express();
 
+// 🔧 CORS CON CREDENCIALES
 const corsOptions = {
-  origin: ['http://localhost:5173'],
+  origin: "http://localhost:5173",
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -16,7 +19,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Ruta anime desde AniList
+// Ruta AniList demo
 app.get('/anime', async (req, res) => {
   const query = `
     query {
@@ -46,11 +49,8 @@ app.get('/anime', async (req, res) => {
   }
 });
 
-//Aquí se montan las rutas de usuarios
 app.use('/usuarios', usersRoutes);
-// Aquí se pueden agregar más rutas según sea necesario
 app.use("/listas", listsRoutes);
-
-
+app.use("/favoritos", favoritesRoutes);
 
 export default app;
