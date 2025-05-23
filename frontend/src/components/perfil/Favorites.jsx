@@ -42,7 +42,7 @@ const Favorites = () => {
   }, []);
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="text-2xl font-bold mb-4">⭐ Animes favoritos</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {favoritos.length === 0 ? (
@@ -51,22 +51,24 @@ const Favorites = () => {
           favoritos.map((anime) => (
             <div
               key={anime.id_anime}
-              className="bg-pink-100 rounded-lg shadow-md overflow-hidden"
+              className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg"
             >
               <img
                 src={anime.url_imagen}
                 alt={anime.titulo}
                 className="w-full h-64 object-cover"
               />
-              <h2 className="text-lg font-semibold text-center mt-2">
-                {anime.titulo}
-              </h2>
-              <button
-                onClick={() => eliminarFavorito(anime.id_anime)}
-                className="bg-red-600 text-white px-4 py-2 m-4 rounded hover:bg-red-700 block mx-auto"
-              >
-                Eliminar de favoritos
-              </button>
+              <div className="p-4">
+                <h2 className="text-base font-semibold text-white text-center">
+                  {anime.titulo}
+                </h2>
+                <button
+                  onClick={() => eliminarFavorito(anime.id_anime)}
+                  className="w-full bg-red-600 text-white px-3 py-2 mt-3 rounded hover:bg-red-700 text-sm"
+                >
+                  Eliminar de favoritos
+                </button>
+              </div>
             </div>
           ))
         )}

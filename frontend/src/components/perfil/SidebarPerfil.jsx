@@ -6,7 +6,7 @@ const SidebarPerfil = () => {
   const activeClass = "bg-[#1B9CF0] text-white";
 
   return (
-    <aside className="w-64 shadow-md h-[500px] mt-6 ml-10 bg-white/12 p-8 backdrop-blur-lg rounded-lg border-1 border-white ">
+    <aside className="w-64 shadow-md h-[500px] mt-20 ml-10 bg-white/12 p-8 backdrop-blur-lg rounded-lg border-1 border-white ">
       <h2 className="text-xl font-bold mb-4">Mi perfil</h2>
       <nav className="space-y-5">
         <NavLink

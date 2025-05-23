@@ -2,7 +2,7 @@ const DatosUser = () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
   
     return (
-      <div>
+      <div className="max-w-6xl mx-auto px-4 py-10">
         
         <div className="shadow-xl rounded-lg p-6 space-y-4 bg-white/10 backdrop-blur-lg border-1 border-white">
         <h1 className="text-2xl font-semibold mb-4">👤 Mis datos</h1>

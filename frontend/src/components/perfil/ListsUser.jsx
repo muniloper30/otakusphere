@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import ModalConfirmacion from "./ModalConfirm";
 import { notifyError, notifyInfo } from "../../utils/ToastUtils";
 
-
 const ListsUser = () => {
   const [categoriaActiva, setCategoriaActiva] = useState("viendo");
   const [animes, setAnimes] = useState([]);
@@ -121,7 +120,7 @@ const ListsUser = () => {
   }, [categoriaActiva]);
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="text-2xl font-semibold mb-4">📺 Mis listas</h1>
 
       {/* Tabs */}
@@ -147,45 +146,43 @@ const ListsUser = () => {
           <p>No hay animes en esta lista.</p>
         ) : (
           animes.map((anime) => (
-            <div
-              key={anime.id_api}
-              className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:scale-105 transition duration-500"
-            >
+            <div className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg">
               <img
                 src={anime.url_imagen}
                 alt={anime.titulo}
                 className="w-full h-64 object-cover"
               />
-              <h2 className="mt-2 text-lg font-semibold text-center text-white">
-                {anime.titulo}
-              </h2>
-              <div className="flex flex-col items-center p-4">
-                <button
-                  onClick={() => abrirModalConfirmacion(anime)}
-                  className="mt-3 mb-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm block mx-auto"
-                >
-                  Eliminar
-                </button>
-                <select
-                  value=""
-                  onChange={(e) =>
-                    handleCambioLista(anime.id_api, e.target.value)
-                  }
-                  className="bg-[#1B9CF0] text-white text-center border border-gray-300 rounded-md px-2 py-1 text-sm cursor-pointer"
-                >
-                  <option disabled value="">
-                    Mover a...
-                  </option>
-                  {Object.entries(categorias)
-                    .filter(([key]) => key !== categoriaActiva)
-                    .map(([key, label]) => (
-                      <option key={key} value={key}>
-                        {label}
-                      </option>
-                    ))}
-                </select>
+              <div className="p-4">
+                <h2 className="text-base font-semibold text-white text-center">
+                  {anime.titulo}
+                </h2>
+                <div className="mt-3">
+                  <select
+                    value=""
+                    onChange={(e) =>
+                      handleCambioLista(anime.id_api, e.target.value)
+                    }
+                    className="w-full bg-white text-black px-2 py-1 text-sm rounded mb-2"
+                  >
+                    <option disabled value="">
+                      📥 Mover a...
+                    </option>
+                    {Object.entries(categorias)
+                      .filter(([key]) => key !== categoriaActiva)
+                      .map(([key, label]) => (
+                        <option key={key} value={key}>
+                          {label}
+                        </option>
+                      ))}
+                  </select>
+                  <button
+                    onClick={() => abrirModalConfirmacion(anime)}
+                    className="w-full bg-red-600 text-white px-3 py-1 text-sm rounded hover:bg-red-700"
+                  >
+                    Eliminar
+                  </button>
+                </div>
               </div>
-              {/* Botón eliminar */}
             </div>
           ))
         )}
