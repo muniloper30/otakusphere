@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ModalConfirmacion from "./ModalConfirm";
-import { notifyError, notifyInfo, notifySuccess } from "../../utils/ToastUtils";
+import { notifyError, notifyInfo } from "../../utils/ToastUtils";
+import { Eye } from "lucide-react";
 
 const ListsUser = () => {
   const [categoriaActiva, setCategoriaActiva] = useState("viendo");
@@ -73,15 +74,45 @@ const ListsUser = () => {
 
       if (res.ok) {
         setAnimes(animes.filter((anime) => anime.id_api !== id_api));
-        notifyInfo(
-          `"${animeAEliminar.titulo}" ha sido eliminado de tu lista.`
-        );
+        notifyInfo(`"${animeAEliminar.titulo}" ha sido eliminado de tu lista.`);
       } else {
         const data = await res.json();
         notifyError(`Error: ${data.error}`);
       }
     } catch (error) {
       console.error("Error al eliminar el anime:", error);
+    }
+  };
+
+  const handleCambioLista = async (id_api, nombre_lista_destino) => {
+    const token = localStorage.getItem("token");
+
+    if (nombre_lista_destino === categoriaActiva) return; // No hacer nada si no hay cambio
+
+    try {
+      const res = await fetch("http://localhost:8080/listas/mover", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          id_api,
+          nombre_lista_origen: categoriaActiva,
+          nombre_lista_destino,
+        }),
+      });
+
+      if (res.ok) {
+        notifyInfo("Anime movido correctamente.");
+        fetchAnimes(categoriaActiva); // Vuelve a cargar la lista activa
+      } else {
+        const data = await res.json();
+        notifyError(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Error al mover el anime:", error);
+      notifyError("Error interno al mover el anime.");
     }
   };
 
@@ -98,9 +129,9 @@ const ListsUser = () => {
         {Object.entries(categorias).map(([key, label]) => (
           <button
             key={key}
-            className={`px-4 py-2 rounded cursor-pointer ${
+            className={`px-4 py-2 rounded cursor-pointer hover:bg-[#1B9CF0] ${
               categoriaActiva === key
-                ? "bg-[#1B9CF0] text-white"
+                ? "bg-blue-400 text-white"
                 : "bg-gray-200 text-gray-800"
             }`}
             onClick={() => setCategoriaActiva(key)}
@@ -128,14 +159,33 @@ const ListsUser = () => {
               <h2 className="mt-2 text-lg font-semibold text-center text-white">
                 {anime.titulo}
               </h2>
-
+              <div className="flex flex-col items-center p-4">
+                <button
+                  onClick={() => abrirModalConfirmacion(anime)}
+                  className="mt-3 mb-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm block mx-auto"
+                >
+                  Eliminar
+                </button>
+                <select
+                  value=""
+                  onChange={(e) =>
+                    handleCambioLista(anime.id_api, e.target.value)
+                  }
+                  className="bg-[#1B9CF0] text-white text-center border border-gray-300 rounded-md px-2 py-1 text-sm cursor-pointer"
+                >
+                  <option disabled value="">
+                    Mover a...
+                  </option>
+                  {Object.entries(categorias)
+                    .filter(([key]) => key !== categoriaActiva)
+                    .map(([key, label]) => (
+                      <option key={key} value={key}>
+                        {label}
+                      </option>
+                    ))}
+                </select>
+              </div>
               {/* Botón eliminar */}
-              <button
-                onClick={() => abrirModalConfirmacion(anime)}
-                className="mt-3 mb-3 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm block mx-auto"
-              >
-                Eliminar
-              </button>
             </div>
           ))
         )}
