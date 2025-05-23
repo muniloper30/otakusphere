@@ -129,3 +129,69 @@ export const eliminarAnimeDeLista = async (req, res) => {
     }
   };
   
+// Mover un anime de una lista a otra
+// Esta función mueve un anime de una lista a otra para el usuario
+  export const moverAnimeDeLista = async (req, res) => {
+  const { id_api, nombre_lista_origen, nombre_lista_destino } = req.body;
+  const id_usuario = req.usuario.id;
+
+  if (!id_api || !nombre_lista_origen || !nombre_lista_destino) {
+    return res.status(400).json({ error: "Faltan datos requeridos." });
+  }
+
+  try {
+    // 1. Obtener id_anime
+    const animeRes = await pool.query(
+      "SELECT id_anime FROM animes WHERE id_api = $1",
+      [id_api]
+    );
+    if (animeRes.rows.length === 0) {
+      return res.status(404).json({ error: "Anime no encontrado." });
+    }
+    const id_anime = animeRes.rows[0].id_anime;
+
+    // 2. Obtener id_lista_origen
+    const listaOrigenRes = await pool.query(
+      "SELECT id_lista FROM listas WHERE id_usuario = $1 AND nombre_lista = $2",
+      [id_usuario, nombre_lista_origen]
+    );
+    if (listaOrigenRes.rows.length === 0) {
+      return res.status(404).json({ error: "Lista de origen no encontrada." });
+    }
+    const id_lista_origen = listaOrigenRes.rows[0].id_lista;
+
+    // 3. Obtener o crear id_lista_destino
+    let id_lista_destino;
+    const listaDestinoRes = await pool.query(
+      "SELECT id_lista FROM listas WHERE id_usuario = $1 AND nombre_lista = $2",
+      [id_usuario, nombre_lista_destino]
+    );
+
+    if (listaDestinoRes.rows.length > 0) {
+      id_lista_destino = listaDestinoRes.rows[0].id_lista;
+    } else {
+      const nuevaLista = await pool.query(
+        "INSERT INTO listas (id_usuario, nombre_lista) VALUES ($1, $2) RETURNING id_lista",
+        [id_usuario, nombre_lista_destino]
+      );
+      id_lista_destino = nuevaLista.rows[0].id_lista;
+    }
+
+    // 4. Eliminar de la lista de origen
+    await pool.query(
+      "DELETE FROM lista_animes WHERE id_lista = $1 AND id_anime = $2",
+      [id_lista_origen, id_anime]
+    );
+
+    // 5. Insertar en la lista destino (si no existe)
+    await pool.query(
+      "INSERT INTO lista_animes (id_lista, id_anime) VALUES ($1, $2) ON CONFLICT DO NOTHING",
+      [id_lista_destino, id_anime]
+    );
+
+    res.status(200).json({ mensaje: "Anime movido correctamente entre listas." });
+  } catch (err) {
+    console.error("Error al mover anime:", err);
+    res.status(500).json({ error: "Error interno del servidor." });
+  }
+};
