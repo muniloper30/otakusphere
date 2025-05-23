@@ -4,8 +4,8 @@ import Pagination from "../components/Pagination";
 import AnimeFilters from "../components/AnimeFilters";
 import debounce from "lodash/debounce";
 import { notifySuccess, notifyError } from "../utils/ToastUtils"; 
-
-
+import BotonFavorito from "../components/BotonFavorito";
+import { Star } from "lucide-react";
 
 //Constantes para los filtros
 const AnilistPage = () => {
@@ -165,6 +165,7 @@ const AnilistPage = () => {
               alt={anime.title.romaji}
               className="w-full h-64 object-cover"
             />
+            <BotonFavorito anime={anime} />
             <div className="p-4">
               <h2 className="text-lg font-semibold">{anime.title.romaji}</h2>
               <p className="text-sm text-gray-700">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ModalConfirmacion from "./ModalConfirm";
 import { notifyError, notifyInfo } from "../../utils/ToastUtils";
-import { Eye } from "lucide-react";
+
 
 const ListsUser = () => {
   const [categoriaActiva, setCategoriaActiva] = useState("viendo");
