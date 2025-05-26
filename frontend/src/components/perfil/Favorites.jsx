@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { notifyError, notifyInfo } from "../../utils/ToastUtils";
+import ModalConfirmacion from "./ModalConfirm";
 
 const Favorites = () => {
   const [favoritos, setFavoritos] = useState([]);
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [animeAEliminar, setAnimeAEliminar] = useState(null);
 
+  // Obtener favoritos desde backend
   const fetchFavoritos = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -19,6 +23,7 @@ const Favorites = () => {
     }
   };
 
+  // Eliminar favorito desde backend
   const eliminarFavorito = async (id_anime) => {
     const token = localStorage.getItem("token");
     try {
@@ -37,6 +42,27 @@ const Favorites = () => {
     }
   };
 
+  // Abrir modal de confirmación
+  const abrirModalConfirmacion = (anime) => {
+    setAnimeAEliminar(anime);
+    setMostrarModal(true);
+  };
+
+  // Cancelar eliminación
+  const cancelarEliminacion = () => {
+    setAnimeAEliminar(null);
+    setMostrarModal(false);
+  };
+
+  // Confirmar eliminación
+  const confirmarEliminacion = async () => {
+    if (!animeAEliminar) return;
+    await eliminarFavorito(animeAEliminar.id_anime);
+    setAnimeAEliminar(null);
+    setMostrarModal(false);
+  };
+
+  // Cargar favoritos al iniciar
   useEffect(() => {
     fetchFavoritos();
   }, []);
@@ -44,7 +70,8 @@ const Favorites = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="text-2xl font-bold mb-4">⭐ Animes favoritos</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {favoritos.length === 0 ? (
           <p>No tienes animes marcados como favoritos.</p>
         ) : (
@@ -63,8 +90,8 @@ const Favorites = () => {
                   {anime.titulo}
                 </h2>
                 <button
-                  onClick={() => eliminarFavorito(anime.id_anime)}
-                  className="w-full bg-red-600 text-white px-3 py-2 mt-3 rounded hover:bg-red-700 text-sm"
+                  onClick={() => abrirModalConfirmacion(anime)}
+                  className="w-full bg-red-600 text-white px-3 py-2 mt-3 rounded hover:bg-red-700 text-sm cursor-pointer"
                 >
                   Eliminar de favoritos
                 </button>
@@ -73,6 +100,17 @@ const Favorites = () => {
           ))
         )}
       </div>
+
+      {mostrarModal && (
+        <ModalConfirmacion
+          title="¿Estás seguro?"
+          message={`¿Quieres eliminar "${animeAEliminar?.titulo}" de tus favoritos?`}
+          onCancel={cancelarEliminacion}
+          onConfirm={confirmarEliminacion}
+          confirmText="Sí, eliminar"
+          cancelText="Cancelar"
+        />
+      )}
     </div>
   );
 };
