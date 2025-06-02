@@ -80,6 +80,7 @@ const Favorites = () => {
               key={anime.id_anime}
               className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg"
             >
+            <p className="bg-gray-500 text-center">⭐FAV⭐</p>
               <img
                 src={anime.url_imagen}
                 alt={anime.titulo}
@@ -95,6 +96,7 @@ const Favorites = () => {
                 >
                   Eliminar de favoritos
                 </button>
+                
               </div>
             </div>
           ))

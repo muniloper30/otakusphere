@@ -10,7 +10,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import DatosUser from "./components/perfil/DatosUser";
 import ListsUser from "./components/perfil/ListsUser";
 import ToastProvider from "./providers/ToastProvider";
-import Favorites from "./components/perfil/Favorites.jsx";
+import Favorites from "./components/perfil/Favorites";
 
 
 function App() {

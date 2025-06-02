@@ -16,7 +16,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Redirigete a http://localhost:5173 para ver la aplicación cliente');
 });
 
 // Ruta AniList demo
