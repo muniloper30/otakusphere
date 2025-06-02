@@ -1,14 +1,15 @@
 import HeroSection from "../components/HeroSection";
 import FeatureSection from "../components/FeatureSection";
-// import AnimeSlider from "../components/AnimeSlider";
+import AnimeLoopBanner from "../components/AnimeLoopBanner";
+
 
 
 const HomePage = () => {
     return (
         <div>
+            <AnimeLoopBanner />
             <HeroSection />
             <FeatureSection />
-            
         </div>
     );
     }
