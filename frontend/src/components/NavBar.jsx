@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoNav from "../assets/otakulogo1.png";
 import { useNavigate } from "react-router-dom";
+import { LogOut } from "lucide-react";
 
 const NavBar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -22,6 +24,11 @@ const NavBar = () => {
     setIsOpen(false);
     navigate(path);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token); // true si hay token
+  }, [location.pathname]);
 
   return (
     <>
@@ -66,21 +73,49 @@ const NavBar = () => {
                   Perfil
                 </Link>
               </li>
+
+             {isLoggedIn && (
+              <div className="relative group">
+                <button
+                  aria-label="Cerrar sesión"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("usuario");
+                    window.location.href = "/";
+                  }}
+                  className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-red-700 py-2 px-4 text-white rounded-md shadow-md hover:scale-105 hover:from-red-600 hover:to-red-800 transition duration-300 cursor-pointer"
+                >
+                  <LogOut className="w-5 h-5" />
+                </button>
+
+                {/* Tooltip al hacer hover */}
+                <span className="absolute -bot-10 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 bg-gray-800 text-white text-sm py-1 px-3 rounded shadow transition-all duration-300">
+                  Cerrar sesión
+                </span>
+              </div>
+            )}
+
+
             </ul>
-            <div className="hidden lg:flex justify-center space-x-12 items-center">
-              <Link
-                to="/Login"
-                className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125"
-              >
-                Iniciar Sesión
-              </Link>
-              <Link
-                to="/Register"
-                className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125"
-              >
-                Crear una cuenta
-              </Link>
-            </div>
+            {!isLoggedIn && (
+              <div className="hidden lg:flex justify-center space-x-12 items-center">
+                <Link
+                  to="/Login"
+                  className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125"
+                >
+                  Iniciar Sesión
+                </Link>
+                <Link
+                  to="/Register"
+                  className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125"
+                >
+                  Crear una cuenta
+                </Link>
+              </div>
+            )}
+
+           
+
             <div
               className={`lg:hidden cursor-pointer transition-all duration-300 ${
                 isOpen ? "text-pink-500 rotate-90" : "text-white"
@@ -125,22 +160,37 @@ const NavBar = () => {
               </ul>
               <br />
               <br />
-              <div className="flex flex-col items-center gap-5">
-                <Link
-                  to="/Login"
-                  onClick={handleNavClick}
-                  className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
+              {!isLoggedIn && (
+                <div className="flex flex-col items-center gap-5">
+                  <Link
+                    to="/Login"
+                    onClick={handleNavClick}
+                    className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
+                  >
+                    Iniciar Sesión
+                  </Link>
+                  <Link
+                    to="/Register"
+                    onClick={handleNavClick}
+                    className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
+                  >
+                    Crear una cuenta
+                  </Link>
+                </div>
+              )}
+
+              {isLoggedIn && (
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("usuario"); // si guardas info del usuario también
+                    window.location.href = "/"; // redirige al inicio
+                  }}
+                  className="bg-red-500 py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
                 >
-                  Iniciar Sesión
-                </Link>
-                <Link
-                  to="/Register"
-                  onClick={handleNavClick}
-                  className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125 text-2xl cursor-pointer"
-                >
-                  Crear una cuenta
-                </Link>
-              </div>
+                  🔒 Cerrar sesión
+                </button>
+              )}
             </div>
           )}
         </div>

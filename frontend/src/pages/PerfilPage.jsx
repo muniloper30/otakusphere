@@ -4,7 +4,7 @@ import SidebarPerfil from "../components/perfil/SidebarPerfil";
 const PerfilPage = () => {
   return (
     <div className="min-h-screen flex justify-center">
-      <div className="flex flex-col md:flex-row w-full max-w-7xl">
+      <div className="flex justify-center flex-col md:flex-row w-full max-w-7xl">
         <SidebarPerfil />
         <main className="flex-1 p-6">
           <Outlet />
