@@ -9,7 +9,7 @@ const ListsUser = () => {
   const [animeAEliminar, setAnimeAEliminar] = useState(null);
 
   const categorias = {
-    viendo: "🟠 Viendo",
+    viendo: "🟠 Viendo ",
     pendiente: "⏳ Pendientes",
     completado: "✅ Completados",
   };
@@ -147,6 +147,9 @@ const ListsUser = () => {
         ) : (
           animes.map((anime) => (
             <div className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg">
+              <p className="bg-gray-500 text-center">
+                 {categorias[categoriaActiva]}
+              </p>
               <img
                 src={anime.url_imagen}
                 alt={anime.titulo}
