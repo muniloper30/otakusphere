@@ -180,7 +180,7 @@ const ListsUser = () => {
                   </select>
                   <button
                     onClick={() => abrirModalConfirmacion(anime)}
-                    className="w-full bg-red-600 text-white px-3 py-1 text-sm rounded hover:bg-red-700"
+                    className="w-full bg-red-600 text-white px-3 py-1 text-sm rounded hover:bg-red-700 cursor-pointer"
                   >
                     Eliminar
                   </button>

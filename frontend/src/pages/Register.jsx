@@ -69,9 +69,7 @@ const Register = () => {
         <h1 className="text-2xl bg-gray-700 text-center font-bold mb-6 py-2 px-3 border rounded-md animate-impulse-rotation-left">
           Organiza tu mundo otaku en un solo lugar
         </h1>
-        <h1 className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] text-2xl font-bold mb-6 py-2 px-3 border rounded-md animate-impulse-rotation-left">
-          Crear cuenta
-        </h1>
+        
         <form
           onSubmit={handleSubmit}
           className="bg-gray-100 p-6 rounded shadow-md w-75 max-w-md animate-impulse-rotation-left"

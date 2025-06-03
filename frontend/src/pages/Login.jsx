@@ -54,24 +54,8 @@ const handleSubmit = async (e) => {
         <h1 className="text-2xl bg-gray-700 text-center font-bold mb-6 py-2 px-3 border rounded-md animate-impulse-rotation-left">
           Tu universo otaku te espera. <br /> Inicia sesión.
         </h1>
-        <h1 className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] text-2xl font-bold mb-6 py-2 px-3 border rounded-md animate-impulse-rotation-left">
-          Acceder
-        </h1>
+        
         <form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded shadow-md w-75 max-w-md animate-impulse-rotation-left">
-          <div className="mb-4">
-            <label
-              className="block text-gray-800 text-sm font-bold mb-2"
-              htmlFor="username"
-            >
-              Nombre de usuario
-            </label>
-            <input
-              type="text"
-              id="username"
-              placeholder="Escribe tu nombre otaku"
-              className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
           <div className="mb-4">
             <label
               className="block text-gray-800 text-sm font-bold mb-2"
