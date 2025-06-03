@@ -3,6 +3,10 @@ import cors from 'cors';
 import usersRoutes from './routes/users.routes.js';
 import listsRoutes from "./routes/lists.routes.js";
 import favoritesRoutes from "./routes/favorites.routes.js";
+import reviwsRoutes from "./routes/reviews.routes.js";
+import animesRoutes from "./routes/animes.routes.js";
+
+
 
 const app = express();
 
@@ -52,5 +56,7 @@ app.get('/anime', async (req, res) => {
 app.use('/usuarios', usersRoutes);
 app.use("/listas", listsRoutes);
 app.use("/favoritos", favoritesRoutes);
+app.use("/reviews", reviwsRoutes);
+app.use("/animes", animesRoutes);
 
 export default app;
