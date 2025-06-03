@@ -3,9 +3,10 @@ import axios from "axios";
 import Pagination from "../components/Pagination";
 import AnimeFilters from "../components/AnimeFilters";
 import debounce from "lodash/debounce";
-import { notifySuccess, notifyError } from "../utils/ToastUtils"; 
 import BotonFavorito from "../components/BotonFavorito";
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import ListSelector from "../components/ListSelector";
 
 //Constantes para los filtros
 const AnilistPage = () => {
@@ -13,7 +14,7 @@ const AnilistPage = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
-// Estado para los filtros
+  // Estado para los filtros
   const [filters, setFilters] = useState({
     search: "",
     genre: "",
@@ -21,11 +22,12 @@ const AnilistPage = () => {
     status: "",
   });
 
+  const navigate = useNavigate();
+
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
     setPage(1);
   };
-
 
   // Función para obtener los animes de la API de Anilist
   // Se utiliza useCallback para evitar que la función se vuelva a crear en cada renderizado
@@ -97,15 +99,14 @@ const AnilistPage = () => {
   // useEffect para cargar los animes al montar el componente y al cambiar de página o filtros
   // Se utiliza debounce para evitar que la función se ejecute demasiadas veces al cambiar los filtros
   useEffect(() => {
-  const debouncedFetch = debounce(fetchAnimes, 500); // espera 500 ms
-  debouncedFetch();
+    const debouncedFetch = debounce(fetchAnimes, 500); // espera 500 ms
+    debouncedFetch();
 
-  return () => {
-    debouncedFetch.cancel(); // limpia el debounce si el componente se desmonta o cambia antes de tiempo
-  };
-}, [fetchAnimes]);
+    return () => {
+      debouncedFetch.cancel(); // limpia el debounce si el componente se desmonta o cambia antes de tiempo
+    };
+  }, [fetchAnimes]);
 
-  
   if (loading) {
     return (
       <div className="text-3xl flex items-center justify-center h-screen">
@@ -117,79 +118,38 @@ const AnilistPage = () => {
     );
   }
 
-  // Función para guardar el anime en la lista del usuario
-  // Se utiliza la API de la aplicación para guardar el anime en la lista del usuario
- const guardarEnLista = async (anime, estado) => {
-  const token = localStorage.getItem("token");
-
-  try {
-    const res = await fetch("http://localhost:8080/listas", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        id_api: anime.id,
-        titulo: anime.title.romaji,
-        url_imagen: anime.coverImage.extraLarge,
-        nombre_lista: estado
-      })
-    });
-
-    if (res.ok) {
-      notifySuccess(`Añadido a la lista: ${estado}`);
-    } else {
-      const err = await res.json();
-      notifyError(`Error: ${err.error}`);
-    }
-  } catch (err) {
-    console.error("Error al guardar en lista:", err);
-    notifyError("Error al conectar con el servidor");
-  }
-};
-  
-  
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-8 text-center">Animes Populares</h1>
       <AnimeFilters filters={filters} onChange={handleFilterChange} />
-     <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-  {animes.map((anime) => (
-    <div
-      key={anime.id}
-      className="relative bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg"
-    >
-      <img
-        src={anime.coverImage.extraLarge}
-        alt={anime.title.romaji}
-        className="w-full h-44 sm:h-64 object-cover"
-      />
-      <BotonFavorito anime={anime} />
-      <div className="p-2 sm:p-4">
-        <h2 className="text-sm sm:text-lg font-semibold truncate">
-          {anime.title.romaji}
-        </h2>
-        <p className="text-xs sm:text-sm text-gray-800">
-          {anime.format} • {anime.episodes ?? "?"} episodios
-        </p>
-
-        <div className="mt-2">
-          <select
-            onChange={(e) => guardarEnLista(anime, e.target.value)}
-            defaultValue=""
-            className="w-full px-2 py-1 text-xs sm:text-sm rounded bg-white text-black"
+      <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        {animes.map((anime) => (
+          <div
+            key={anime.id}
+            className="relative bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg"
           >
-            <option value="" disabled>📥 Añadir a lista</option>
-            <option value="viendo">🟠 Viendo</option>
-            <option value="pendiente">⏳ Pendiente</option>
-            <option value="completado">✅ Completado</option>
-          </select>
-        </div>
+            <img
+              onClick={() => navigate(`/anime/${anime.id}`)}
+              src={anime.coverImage.extraLarge}
+              alt={anime.title.romaji}
+              className="w-full h-44 sm:h-64 object-cover cursor-pointer"
+            />
+            <BotonFavorito anime={anime} />
+            <div className="p-2 sm:p-4">
+              <h2 className="text-sm sm:text-lg font-semibold truncate">
+                {anime.title.romaji}
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-800">
+                {anime.format} • {anime.episodes ?? "?"} episodios
+              </p>
+
+              <div className="mt-2">
+                <ListSelector anime={anime} className="text-xs sm:text-sm" />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
       <Pagination
         currentPage={page}
         totalPages={totalPages}

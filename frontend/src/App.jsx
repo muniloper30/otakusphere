@@ -11,7 +11,7 @@ import DatosUser from "./components/perfil/DatosUser";
 import ListsUser from "./components/perfil/ListsUser";
 import ToastProvider from "./providers/ToastProvider";
 import Favorites from "./components/perfil/Favorites";
-
+import AnimePage from "./pages/AnimePage"; // Asegúrate de que AnimePage esté importado si lo necesitas
 
 function App() {
   return (
@@ -43,6 +43,7 @@ function App() {
             <Route path="listas" element={<ListsUser/>}/>
             <Route path="favoritos" element={<Favorites/>} />
           </Route>
+          <Route path="/anime/:id_api" element={<AnimePage />} /> 
 
        
 

@@ -66,7 +66,7 @@ const NavBar = () => {
               </li>
               <li>
                 <Link
-                  to="/Perfil"
+                  to="/Perfil/datos"
                   onClick={handleNavClick}
                   className="block px-3 py-2 text-neutral-100 hover:bg-[#F166B4] transition duration-500 hover:scale-125 cursor-pointer"
                 >
