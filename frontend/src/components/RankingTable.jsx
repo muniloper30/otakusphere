@@ -3,7 +3,8 @@ const RankingTable = ({ animes = [] }) => {
 
   return (
     <div  className="relative isolate px-6 lg:px-8 pt-30 pb-36">
-      <h2 className="text-2xl font-bold text-white mb-6 text-center">TOP 100 ANIME</h2>
+      <h2 className="text-2xl font-bold text-white mb-3 text-center">TOP 10 ANIME</h2>
+      <p className="text-center text-sm">Lista actualizada</p>
 
       {/* Vista de escritorio */}
       <div id="ranking" className="hidden md:block overflow-x-auto">
@@ -55,7 +56,7 @@ const RankingTable = ({ animes = [] }) => {
                 </td>
 
                 <td className="py-2 text-sm text-gray-300">
-                  {anime.userCount.toLocaleString()} users
+                  {anime.userCount.toLocaleString()}
                 </td>
 
                 <td className="py-2 text-sm">{anime.type}</td>
