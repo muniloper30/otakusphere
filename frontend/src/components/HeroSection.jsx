@@ -31,7 +31,7 @@ const HeroSection = ({ scrollToRanking }) => {
               onClick={scrollToRanking}
               className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125"
             >
-              Top 100 <span aria-hidden="true">→</span>
+              Top 10 <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
