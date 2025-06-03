@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-const HeroSection = () => {
+const HeroSection = ({ scrollToRanking }) => {
   return (
-    <div id="heroSection" className="relative isolate px-6 pt-14 lg:px-8">
-      <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 animate-fade-in-up">
-        <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+    <div id="heroSection" className="relative isolate px-6  lg:px-8">
+      <div className="mx-auto max-w-2xl py-22   animate-fade-in-up">
+        <div className="hidden sm:mb-4 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm/6 text-white ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             Tu espacio Otaku personalizado, tu lista, tus reseñas, tus recomendaciones.{" "}
             <a href="#featureSection" className="font-semibold text-[#F166B4]">
@@ -28,10 +28,10 @@ const HeroSection = () => {
               Explorar lista
             </Link>
             <a
-              href="#featureSection"
+              onClick={scrollToRanking}
               className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125"
             >
-              Conoce más <span aria-hidden="true">→</span>
+              Top 100 <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>

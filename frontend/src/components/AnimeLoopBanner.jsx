@@ -1,5 +1,5 @@
 import { ArrowBigDown } from "lucide-react";
-const AnimeLoopBanner = () => {
+const AnimeLoopBanner = ({ scrollToHero }) => {
   return (
     <section className="relative w-full h-screen overflow-hidden">
       {/* Carrusel horizontal con duplicación */}
@@ -34,21 +34,22 @@ const AnimeLoopBanner = () => {
 
       {/* Texto centrado */}
       <div className="absolute inset-0 z-20 pb-30 flex flex-col items-center justify-center text-center animate-fade-in">
-        <h1 className="text-white text-3xl sm:text-2xl md:text-8xl font-extrabold tracking-wide drop-shadow-xl ">
-          OTAKUSPHERE
-        </h1>
+        <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#F166B4] sm:text-7xl">
+            OTAKU<span className="text-[#1B9CF0]">SPHERE</span>
+          </h1>
         <p className="text-white mt-4 text-lg md:text-2xl font-light tracking-wide  delay-1000">
           Tu universo anime personalizado
         </p>
         
       </div>
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center md:pt-20">
-        <a
+        <button
+          onClick={scrollToHero}
           href="/#heroSection"
-          className="tracking-wide drop-shadow-xl "
+          className="tracking-wide drop-shadow-xl cursor-pointer"
         >
           <ArrowBigDown className="animate-arrowBounce mt-10 text-white w-10 h-10 " />
-        </a>
+        </button>
       </div>
     </section>
   );
