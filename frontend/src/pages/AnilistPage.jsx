@@ -154,42 +154,42 @@ const AnilistPage = () => {
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-8 text-center">Animes Populares</h1>
       <AnimeFilters filters={filters} onChange={handleFilterChange} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {animes.map((anime) => (
-          <div
-            key={anime.id}
-            className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-110 hover:shadow-lg"
+     <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+  {animes.map((anime) => (
+    <div
+      key={anime.id}
+      className="relative bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg"
+    >
+      <img
+        src={anime.coverImage.extraLarge}
+        alt={anime.title.romaji}
+        className="w-full h-44 sm:h-64 object-cover"
+      />
+      <BotonFavorito anime={anime} />
+      <div className="p-2 sm:p-4">
+        <h2 className="text-sm sm:text-lg font-semibold truncate">
+          {anime.title.romaji}
+        </h2>
+        <p className="text-xs sm:text-sm text-gray-800">
+          {anime.format} • {anime.episodes ?? "?"} episodios
+        </p>
+
+        <div className="mt-2">
+          <select
+            onChange={(e) => guardarEnLista(anime, e.target.value)}
+            defaultValue=""
+            className="w-full px-2 py-1 text-xs sm:text-sm rounded bg-white text-black"
           >
-            <img
-              src={anime.coverImage.extraLarge}
-              alt={anime.title.romaji}
-              className="w-full h-64 object-cover"
-            />
-            <BotonFavorito anime={anime} />
-            <div className="p-4">
-              <h2 className="text-lg font-semibold">{anime.title.romaji}</h2>
-              <p className="text-sm text-gray-700">
-                {anime.format} • {anime.episodes ?? "?"} episodios
-              </p>
-               {/* Select para añadir a lista */}
-      <div className="mt-2">
-
-        <select
-          onChange={(e) => guardarEnLista(anime, e.target.value)}
-          defaultValue=""
-          className="w-full px-2 py-1 text-sm rounded bg-white text-black"
-        >
-          <option value="" disabled>📥 Añadir a lista</option>
-          <option value="viendo">🟠 Viendo</option>
-          <option value="pendiente">⏳ Pendiente</option>
-          <option value="completado">✅ Completado</option>
-        </select>
+            <option value="" disabled>📥 Añadir a lista</option>
+            <option value="viendo">🟠 Viendo</option>
+            <option value="pendiente">⏳ Pendiente</option>
+            <option value="completado">✅ Completado</option>
+          </select>
+        </div>
       </div>
-
-            </div>
-          </div>
-        ))}
-      </div>
+    </div>
+  ))}
+</div>
       <Pagination
         currentPage={page}
         totalPages={totalPages}
