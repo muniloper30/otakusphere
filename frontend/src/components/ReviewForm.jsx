@@ -100,7 +100,7 @@ const ReviewForm = ({ anime, idAnime, onSubmit }) => {
           max={10}
           value={puntuacion}
           onChange={(e) => setPuntuacion(Number(e.target.value))}
-          className="w-16 p-1 rounded text-black"
+          className="w-16 p-1 rounded text-white"
         />
         <button
           onClick={enviarReseña}

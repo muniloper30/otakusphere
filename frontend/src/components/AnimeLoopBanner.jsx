@@ -34,7 +34,7 @@ const AnimeLoopBanner = ({ scrollToHero }) => {
 
       
       <div className="absolute inset-0 z-20 pb-30 flex flex-col items-center justify-center text-center animate-fade-in">
-        <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#F166B4] sm:text-7xl">
+        <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#F166B4] font-[Saira] md:text-9xl">
             OTAKU<span className="text-[#1B9CF0]">SPHERE</span>
           </h1>
         <p className="text-white mt-4 text-lg md:text-2xl font-light tracking-wide  delay-1000">
