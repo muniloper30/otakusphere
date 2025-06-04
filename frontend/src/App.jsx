@@ -12,6 +12,9 @@ import ListsUser from "./components/perfil/ListsUser";
 import ToastProvider from "./providers/ToastProvider";
 import Favorites from "./components/perfil/Favorites";
 import AnimePage from "./pages/AnimePage"; // Asegúrate de que AnimePage esté importado si lo necesitas
+import UserReviews from "./components/perfil/UserReviews";
+
+
 
 function App() {
   return (
@@ -41,7 +44,8 @@ function App() {
           <Route path="/perfil" element={<ProtectedRoute><PerfilPage /></ProtectedRoute>}>
             <Route path="datos" element={<DatosUser/>}/>
             <Route path="listas" element={<ListsUser/>}/>
-            <Route path="favoritos" element={<Favorites/>} />
+            <Route path="favoritos" element={<Favorites/>}/>
+            <Route path="reseñas" element={<UserReviews />} />
           </Route>
           <Route path="/anime/:id_api" element={<AnimePage />} /> 
 

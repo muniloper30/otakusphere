@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { ChevronsDown } from 'lucide-react';
 const HeroSection = ({ scrollToRanking }) => {
   return (
     <div id="heroSection" className="relative isolate px-6  lg:px-8">
@@ -23,15 +23,15 @@ const HeroSection = ({ scrollToRanking }) => {
           <div className="mt-10 flex items-center justify-center gap-x-10">
             <Link
               to="/AnilistPage"
-              className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-125"
+              className="bg-gradient-to-r from-[#F166B4] to-[#1B9CF0] py-2 px-3 text-neutral-100 rounded-md transition duration-500 hover:scale-110"
             >
               Explorar lista
             </Link>
             <a
               onClick={scrollToRanking}
-              className="py-2 px-3 border rounded-md transition duration-500 hover:scale-125"
+              className="py-2 px-5 border flex gap-1.5 rounded-md transition duration-500 hover:scale-110 cursor-pointer"
             >
-              Top 10 <span aria-hidden="true">→</span>
+              Top 10 <span aria-hidden="true"> <ChevronsDown /></span>
             </a>
           </div>
         </div>
