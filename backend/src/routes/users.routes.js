@@ -26,7 +26,7 @@ router.get("/perfil", verifyToken, (req, res) => {
 
 // Gestión de usuarios
 router.get("/", getUsuarios); // Obtener todos los usuarios
-router.put('/:id', verifyToken, updateUser); // Actualizar usuario
+router.put("/:id", updateUser); // Actualizar usuario
 router.delete("/:id", deleteUser); // Eliminar usuario
 
 // Rutas para obtener usuario por ID

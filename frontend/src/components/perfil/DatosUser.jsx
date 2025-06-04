@@ -15,31 +15,19 @@ const DatosUser = () => {
     setMostrarModal(true);
   };
 
-  const getUserId = (usuario) => {
-  return usuario?.id_usuario || usuario?.id || null;
-};
-
-
   const handleGuardar = async () => {
-  const token = localStorage.getItem("token");
-  const userId = getUserId(usuario);
-
-  console.log("DEBUG - Usuario actual:", usuario);        // 🔍
-  console.log("DEBUG - ID extraído:", userId);            // 🔍
-
-  if (!userId) {
-    notifyInfo("❌ Error: ID de usuario no disponible.");
-    return;
-  }
-
   try {
-    await axios.put(
-      `http://localhost:8080/usuarios/${userId}`,
-      { nombre: nuevoNombre },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    const response = await axios.put(`http://localhost:8080/usuarios/${usuario.id}`, {
+      nombre: nuevoNombre,
+      email: usuario.email
+    });
 
-    const actualizado = { ...usuario, nombre: nuevoNombre };
+    const actualizado = {
+      id: response.data.id || response.data.id_usuario,
+      nombre: response.data.nombre,
+      email: response.data.email
+    };
+
     localStorage.setItem("usuario", JSON.stringify(actualizado));
     setUsuario(actualizado);
     setModoEdicion(false);
@@ -55,7 +43,7 @@ const DatosUser = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <div className="shadow-xl rounded-lg p-6 space-y-4 bg-white/10 backdrop-blur-lg border-1 border-white">
+      <div className="shadow-xl rounded-lg p-6 space-y-4 bg-white/10 backdrop-blur-lg border border-white/20">
         <h1 className="text-2xl font-semibold mb-4">👤 Mis datos</h1>
 
         {modoEdicion ? (
@@ -103,7 +91,6 @@ const DatosUser = () => {
         )}
       </div>
 
-      {/* Modal de confirmación */}
       {mostrarModal && (
         <ModalConfirmacion
           title="¿Confirmar cambio de nombre?"
