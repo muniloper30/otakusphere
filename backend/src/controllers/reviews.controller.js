@@ -1,7 +1,5 @@
 import pool from "../db/db.js";
 
-
-
 // Crear o actualizar una reseña
 export const crearReseña = async (req, res) => {
   const { id_api, titulo, url_imagen, comentario, puntuacion } = req.body;
@@ -42,13 +40,15 @@ export const crearReseña = async (req, res) => {
       [id_usuario, id_anime, comentario, puntuacion]
     );
 
-    res.status(200).json({ mensaje: "Reseña guardada correctamente.", reseña: result.rows[0] });
+    res.status(200).json({
+      mensaje: "Reseña guardada correctamente.",
+      reseña: result.rows[0],
+    });
   } catch (err) {
     console.error("Error al crear reseña:", err);
     res.status(500).json({ error: "Error interno del servidor." });
   }
 };
-
 
 // Obtener todas las reseñas de un anime
 export const obtenerReseñasPorAnime = async (req, res) => {
@@ -71,7 +71,28 @@ export const obtenerReseñasPorAnime = async (req, res) => {
   }
 };
 
-// Obtener reseña de un usuario específico para un anime
+// Obtener todas las reseñas hechas por el usuario autenticado
+export const obtenerReseñasDelUsuario = async (req, res) => {
+  const id_usuario = req.usuario.id;
+
+  try {
+    const result = await pool.query(
+      `SELECT r.id_reseña, r.comentario, r.puntuacion, r.fecha, a.titulo, a.url_imagen
+       FROM reseñas r
+       JOIN animes a ON r.id_anime = a.id_anime
+       WHERE r.id_usuario = $1
+       ORDER BY r.fecha DESC`,
+      [id_usuario]
+    );
+
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error("Error al obtener reseñas del usuario:", err);
+    res.status(500).json({ error: "Error interno del servidor." });
+  }
+};
+
+// Obtener una reseña concreta del usuario sobre un anime
 export const obtenerReseñaPorUsuario = async (req, res) => {
   const { id_anime } = req.params;
   const id_usuario = req.usuario.id;
@@ -94,3 +115,36 @@ export const obtenerReseñaPorUsuario = async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor." });
   }
 };
+
+
+export const eliminarReseña = async (req, res) => {
+  const id_usuario = req.usuario.id;
+  const id_reseña = parseInt(req.params.id, 10); // usa 'id'
+
+
+  if (isNaN(id_reseña)) {
+    return res.status(400).json({ error: "ID inválido" });
+  }
+console.log("ID reseña:", id_reseña, "ID usuario:", id_usuario);
+
+  try {
+    const result = await pool.query(
+      `DELETE FROM reseñas 
+       WHERE id_reseña = $1 AND id_usuario = $2 
+       RETURNING *`,
+      [id_reseña, id_usuario]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Reseña no encontrada o no autorizada." });
+    }
+
+    res.status(200).json({ mensaje: "Reseña eliminada correctamente." });
+  } catch (err) {
+    console.error("Error al eliminar reseña:", err);
+    res.status(500).json({ error: "Error interno del servidor." });
+  }
+};
+
+
+
