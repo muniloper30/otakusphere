@@ -85,10 +85,10 @@ En las opciones de restauración, asegurarse de marcar:
 Pulsar Restore y esperar la confirmación.
 
 >[!IMPORTANT]
->El archivo para la restauración se encuentra exactamente en backend/src/db/
+>El archivo para la restauración se encuentra exactamente en `backend/src/db/`
 >Para la JWT_SECRET, se puede crear con la terminal. Por ejemplo con el comando 
->ssh-keygen -t rsa -b 4096 -m PEM -f private.key, le colocamos una contraseña y luego en el documento 
->.env le poemos la ruta del archivo JWT_SECRET='./private.key' .
+>`ssh-keygen -t rsa -b 4096 -m PEM -f private.key`, le colocamos una contraseña y luego en el documento 
+>.env le poemos la ruta del archivo `JWT_SECRET='./private.key'` .
 
 ## 🛠 Backend – Express + PostgreSQL
 ```
