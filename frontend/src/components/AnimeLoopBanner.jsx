@@ -1,7 +1,7 @@
 import { ArrowBigDown } from "lucide-react";
 const AnimeLoopBanner = ({ scrollToHero }) => {
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section id="heroSection" className="relative w-full h-screen overflow-hidden">
       {/* Carrusel horizontal con duplicación */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="flex w-[400%] h-full animate-loopBanner">

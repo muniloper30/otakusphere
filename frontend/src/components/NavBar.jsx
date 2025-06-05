@@ -41,11 +41,11 @@ const NavBar = () => {
                 alt="OtakuSphere Logo"
                 className="h-15 w-15 mr-2 animate-rotational-wave"
               />
-              <Link to="/HomePage">
+              <a href="/#heroSection">
                 <span className="text-3xl cursor-pointer px-2 py-2 tracking-tight font-[Saira] hover:bg-[#F166B4] active:bg-[#1B9CF0] transition duration-500">
                   OtakuSphere
                 </span>
-              </Link>
+              </a>
             </div>
             <ul className="hidden lg:flex ml-14 space-x-12">
               <li>
