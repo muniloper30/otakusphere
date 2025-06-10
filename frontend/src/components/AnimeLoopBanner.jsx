@@ -48,7 +48,7 @@ const AnimeLoopBanner = ({ scrollToHero }) => {
           href="/#heroSection"
           className="tracking-wide drop-shadow-xl cursor-pointer"
         >
-          <ArrowBigDown className="animate-arrowBounce mt-10 text-white w-10 h-10 " />
+          <ArrowBigDown className="animate-arrowBounce mt-10 text-white w-15 h-15 " />
         </button>
       </div>
     </section>

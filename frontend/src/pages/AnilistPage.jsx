@@ -4,7 +4,6 @@ import Pagination from "../components/Pagination";
 import AnimeFilters from "../components/AnimeFilters";
 import debounce from "lodash/debounce";
 import BotonFavorito from "../components/BotonFavorito";
-import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ListSelector from "../components/ListSelector";
 
@@ -126,7 +125,7 @@ const AnilistPage = () => {
         {animes.map((anime) => (
           <div
             key={anime.id}
-            className="relative bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg"
+            className="relative bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg animate-bounce-fade-in"
           >
             <img
               onClick={() => navigate(`/anime/${anime.id}`)}

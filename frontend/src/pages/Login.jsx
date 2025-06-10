@@ -28,7 +28,7 @@ const handleSubmit = async (e) => {
 
     // Redirigir
     notifyInfo("Bienvenido de nuevo, " + usuario.nombre);
-    navigate("/perfil");
+    navigate("/perfil/datos");
 
   } catch (error) {
     console.error("Error al iniciar sesión:", error);

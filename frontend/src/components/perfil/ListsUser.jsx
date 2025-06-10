@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import ModalConfirmacion from "./ModalConfirm";
 import { notifyError, notifyInfo } from "../../utils/ToastUtils";
+import { ScrollText } from 'lucide-react';
+
 
 const ListsUser = () => {
   const [categoriaActiva, setCategoriaActiva] = useState("viendo");
@@ -9,9 +11,9 @@ const ListsUser = () => {
   const [animeAEliminar, setAnimeAEliminar] = useState(null);
 
   const categorias = {
-    viendo: "🟠 Viendo ",
-    pendiente: "⏳ Pendientes",
-    completado: "✅ Completados",
+    viendo: "Viendo",
+    pendiente: "Pendientes",
+    completado: "Completados",
   };
 
   // Obtener animes según categoría activa
@@ -121,7 +123,7 @@ const ListsUser = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-semibold mb-4">📺 Mis listas</h1>
+      <h1 className="text-2xl font-semibold mb-4 flex items-center gap-3"><ScrollText className="text-amber-500"/> Mis listas</h1>
 
       {/* Tabs */}
       <div className="flex space-x-2 mb-6">
@@ -146,8 +148,8 @@ const ListsUser = () => {
           <p>No hay animes en esta lista.</p>
         ) : (
           animes.map((anime) => (
-            <div className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg">
-              <p className="bg-gray-500 text-center">
+            <div className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg animate-zoom-in">
+              <p className="bg-gray-900 text-center text-lg font-bold p-1">
                  {categorias[categoriaActiva]}
               </p>
               <img
@@ -168,7 +170,7 @@ const ListsUser = () => {
                     className="w-full bg-white text-black px-2 py-1 text-sm rounded mb-2"
                   >
                     <option disabled value="">
-                      📥 Mover a...
+                       Mover a...
                     </option>
                     {Object.entries(categorias)
                       .filter(([key]) => key !== categoriaActiva)

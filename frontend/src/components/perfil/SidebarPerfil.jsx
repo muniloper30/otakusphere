@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { UserPen, ScrollText, Star, NotebookPen, LogOut } from 'lucide-react';
+
 
 const SidebarPerfil = () => {
   const baseClass =
-    "block px-6 py-2 rounded hover:bg-[#1B9CF0] shadow-lg border-2 border-white transition-colors";
+    "block px-6 py-2 rounded hover:bg-[#1B9CF0] shadow-lg border-2 border-white transition-colors flex gap-2";
   const activeClass = "bg-[#1B9CF0] text-white";
 
   return (
@@ -15,7 +17,7 @@ const SidebarPerfil = () => {
             `${baseClass} ${isActive ? activeClass : ""}`
           }
         >
-          👤 Mis datos
+          <UserPen className="text-indigo-600"/> Mis datos
         </NavLink>
         <NavLink
           to="listas"
@@ -23,7 +25,7 @@ const SidebarPerfil = () => {
             `${baseClass} ${isActive ? activeClass : ""}`
           }
         >
-          📺 Mis listas
+          <ScrollText className="text-amber-500"/> Mis listas
         </NavLink>
         <NavLink
           to="favoritos"
@@ -31,7 +33,7 @@ const SidebarPerfil = () => {
             `${baseClass} ${isActive ? activeClass : ""}`
           }
         >
-          ⭐ Favoritos
+          <Star className="text-yellow-400"/> Favoritos
         </NavLink>
         <NavLink
           to="reseñas"
@@ -39,7 +41,7 @@ const SidebarPerfil = () => {
             `${baseClass} ${isActive ? activeClass : ""}`
           }
         >
-          ✍️ Reseñas
+          <NotebookPen className="text-fuchsia-700"/> Reseñas
         </NavLink>
        
 
@@ -49,9 +51,9 @@ const SidebarPerfil = () => {
             localStorage.removeItem("usuario"); // si guardas info del usuario también
             window.location.href = "/"; // redirige al inicio
           }}
-          className="mt-6 block w-full text-left px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer"
+          className="flex gap-2 mt-6 block w-full text-left px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer"
         >
-          🔒 Cerrar sesión
+          <LogOut/> Cerrar sesión
         </button>
       </nav>
     </aside>

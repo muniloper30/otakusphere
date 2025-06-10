@@ -41,10 +41,10 @@ const ListSelector = ({ anime, className = "" }) => {
       defaultValue=""
       className={`w-full px-2 py-1 text-sm rounded bg-white cursor-pointer text-black ${className}`}
     >
-      <option value="" disabled>📥 Añadir a lista</option>
-      <option value="viendo">🟠 Viendo</option>
-      <option value="pendiente">⏳ Pendiente</option>
-      <option value="completado">✅ Completado</option>
+      <option value="" disabled>Añadir a lista</option>
+      <option value="viendo">Viendo</option>
+      <option value="pendiente">Pendiente</option>
+      <option value="completado">Completado</option>
     </select>
   );
 };

@@ -88,7 +88,7 @@ const AnimePage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between animate-zoom-in">
       <main className="max-w-4xl mx-auto px-4 py-10 text-white">
         <div className="flex flex-col md:flex-row gap-6 items-start">
           <img

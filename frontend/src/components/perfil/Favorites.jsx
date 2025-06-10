@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { notifyError, notifyInfo } from "../../utils/ToastUtils";
 import ModalConfirmacion from "./ModalConfirm";
+import { Star } from 'lucide-react';
 
 const Favorites = () => {
   const [favoritos, setFavoritos] = useState([]);
@@ -69,7 +70,7 @@ const Favorites = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-bold mb-4">⭐ Animes favoritos</h1>
+      <h1 className="text-2xl font-bold mb-4 flex gap-3 items-center"><Star className="text-yellow-400"/> Animes favoritos</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {favoritos.length === 0 ? (
@@ -78,9 +79,9 @@ const Favorites = () => {
           favoritos.map((anime) => (
             <div
               key={anime.id_anime}
-              className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg"
+              className="bg-[#F166B4] rounded-lg shadow-md overflow-hidden hover:transition duration-500 hover:scale-105 hover:shadow-lg animate-zoom-in"
             >
-            <p className="bg-gray-500 text-center">⭐FAV⭐</p>
+            <p className="bg-gray-900 text-center text-lg font-bold p-1 flex gap-2 items-center justify-center"><Star className="text-yellow-400"/>FAV<Star className="text-yellow-400"/></p>
               <img
                 src={anime.url_imagen}
                 alt={anime.titulo}

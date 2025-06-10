@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { notifyInfo } from "../../utils/ToastUtils";
 import ModalConfirmacion from "./ModalConfirm";
+import { UserPen, ScrollText, Star, NotebookPen, LogOut } from 'lucide-react';
+
 
 const DatosUser = () => {
   const [usuario, setUsuario] = useState(
@@ -43,8 +45,8 @@ const DatosUser = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <div className="shadow-xl rounded-lg p-6 space-y-4 bg-white/10 backdrop-blur-lg border border-white/20">
-        <h1 className="text-2xl font-semibold mb-4">👤 Mis datos</h1>
+      <div className="shadow-xl rounded-lg p-6 space-y-4 bg-white/10 backdrop-blur-sm border border-black/80 animate-zoom-in">
+        <h1 className="text-2xl font-semibold mb-4 flex gap-3 items-center"><UserPen className="text-indigo-600"/> Mis datos</h1>
 
         {modoEdicion ? (
           <div className="space-y-2">
